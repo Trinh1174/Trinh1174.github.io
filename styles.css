@@ -7,6 +7,27 @@ body {
     padding: 2vh 5vw;
 }
 
+.title-bar {
+    position: relative;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.title-bar h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.home-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 1rem 1.2rem;
+    font-size: 1.2rem;
+}
+
 h1 {
     text-align: center;
     color: #ff69b4; /* hot pink */
@@ -94,6 +115,16 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
+.button-link {
+    padding: 1rem 1rem;
+    background-color: #87cefa;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #6495ed;
 }
