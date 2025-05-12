@@ -75,20 +75,18 @@ th:nth-child(3), td:nth-child(3) {
 }
 
 @media screen and (max-width: 768px) {
+    th:nth-child(1), td:nth-child(1) {
+        width: 30%;
+    }
 
-th:nth-child(1), td:nth-child(1) {
-    width: 30%;
-}
+    th:nth-child(2), td:nth-child(2) {
+        width: 40%;
+        text-align: center;
+    }
 
-th:nth-child(2), td:nth-child(2) {
-    width: 40%;
-    text-align: center;
-}
-
-th:nth-child(3), td:nth-child(3) {
-    width: 30%;
-}
-
+    th:nth-child(3), td:nth-child(3) {
+        width: 30%;
+    }
 }
 
 td:nth-child(3) a {
@@ -127,4 +125,35 @@ a {
 
 .button-link:hover {
     background-color: #6495ed;
+    font-size: 1rem;
+}
+
+.phonetic:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .home-button {
+        font-size: 0.8rem;
+    }
+}
+
+.tones-title {
+    text-align: center;
+    font-size: 2rem;         /* bigger size */
+    letter-spacing: 1rem;      /* spacing between characters */
+    font-weight: bold;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* or 100vh if it's the only content */
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
 }
