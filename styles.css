@@ -142,9 +142,12 @@ a {
 .tones-title {
     text-align: center;
     font-size: 2rem;
-    letter-spacing: 1.2rem;
     margin-bottom: 1.5rem;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    gap: 2rem; /* spacing between tones */
+    flex-wrap: wrap;
 }
 
 .tone {
@@ -152,11 +155,17 @@ a {
     margin: 0 0.5rem;
     transition: transform 0.2s;
 }
-  
+
 .tone:hover {
     transform: scale(1.2);
-    color: #ff69b4;
 }
+
+.tone-huyen { color: #3d7eff; }
+.tone-sac   { color: #00cfc1; }
+.tone-ngang { color: #3a8a12; }
+.tone-hoi   { color: #f5a623; }
+.tone-nang  { color: #ff7dd9; }
+.tone-nga   { color: #ff3d3d; }
 
 .image-container {
     position: relative;
