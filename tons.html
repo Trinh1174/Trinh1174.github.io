@@ -11,9 +11,54 @@
         <h1>Học tiếng Việt</h1>
         <a href="index.html" class="button-link home-button">🏠</a>
     </div>
-    <div class="tones-title">Má Mà Ma Mả mạ Mã</div>
-    <div class="image-container">
-        <img src="pont-tons.png" alt="pont-tons">
+    <div class="tones-title">
+        <span class="tone" data-tone="sac">Má</span>
+        <span class="tone" data-tone="huyen">Mà</span>
+        <span class="tone" data-tone="ngang">Ma</span>
+        <span class="tone" data-tone="hoi">Mả</span>
+        <span class="tone" data-tone="nang">Mạ</span>
+        <span class="tone" data-tone="nga">Mã</span>
     </div>
+
+    <div class="image-container">
+        <img src="pont-tons.png" alt="Pont tons" id="bridge-img">
+        <div id="arrow-sac" class="css-arrow arrow-sac"></div>
+        <div id="arrow-huyen" class="css-arrow arrow-huyen"></div>
+        <div id="arrow-ngang" class="css-arrow arrow-ngang"></div>    
+        <svg id="arrow-hoi" class="svg-curve" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <!-- U-shaped parabolic curve: starts high, dips low, ends high -->
+            <path d="M20,12 Q50,150 80,12" stroke="#00c9a7" stroke-width="4" fill="none" />
+            
+            <!-- Arrowhead pointing slightly up and right, centered at (80,10) -->
+            <polygon points="81,6 84,10 78,12" fill="#00c9a7" />
+        </svg>          
+        <svg id="arrow-hoi" class="svg-curve" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <!-- U-shaped path -->
+            <path d="M20,10 Q50,150 80,10" stroke="#00c9a7" stroke-width="4" fill="none" />
+          
+            <!-- Triangle tip aligned with (80,10), pointing cleanly up-right -->
+            <polygon points="78,8 86,10 78,12" fill="#00c9a7" />
+          </svg>          
+        <div id="arrow-nang" class="css-arrow arrow-nang"></div>
+        <div id="arrow-nga" class="css-arrow arrow-nga"></div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tone').forEach(tone => {
+            tone.addEventListener('click', () => {
+            const toneType = tone.dataset.tone;
+            const arrow = document.getElementById('arrow-' + toneType);
+
+            if (arrow && arrow.style.display === 'block') {
+                arrow.style.display = 'none';
+            } else {
+                document.querySelectorAll('.css-arrow').forEach(arrow => {
+                arrow.style.display = 'none';
+                });
+                if (arrow) arrow.style.display = 'block';
+            }
+            });
+        });
+    </script>      
 </body>
 </html>

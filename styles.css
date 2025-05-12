@@ -5,6 +5,7 @@ body {
     color: #333;
     margin: 0;
     padding: 2vh 5vw;
+    user-select: none;
 }
 
 .title-bar {
@@ -140,20 +141,130 @@ a {
 
 .tones-title {
     text-align: center;
-    font-size: 2rem;         /* bigger size */
-    letter-spacing: 1rem;      /* spacing between characters */
+    font-size: 2rem;
+    letter-spacing: 1.2rem;
+    margin-bottom: 1.5rem;
     font-weight: bold;
 }
 
+.tone {
+    cursor: pointer;
+    margin: 0 0.5rem;
+    transition: transform 0.2s;
+}
+  
+.tone:hover {
+    transform: scale(1.2);
+    color: #ff69b4;
+}
+
 .image-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh; /* or 100vh if it's the only content */
 }
 
 .image-container img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+#bridge-img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+}
+
+.css-arrow {
+    position: absolute;
+    width: 45%;
+    height: 8px; /* increased from 6px to 8px */
+    background-color: #00c9a7;
+    transform: rotate(35deg);
+    transform-origin: left center;
+    display: none;
+    z-index: 10;
+}
+
+/* Smaller and more elegant tip */
+.css-arrow::after {
+    content: '';
+    position: absolute;
+    right: -18px; /* match with new arrowhead width */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 18px solid #00c9a7; /* increased from 16px */
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+}
+
+.arrow-sac {
+    width: 44%;
+    bottom: 8%;
+    left: 50%;
+    transform: rotate(-40deg);
+    transform-origin: left center;
+}
+
+.arrow-huyen {
+    width: 44%;
+    top: 5%;
+    left: 14%;
+    transform: rotate(40deg);
+    transform-origin: left center;
+}
+
+.arrow-ngang {
+    width: 68%;
+    top: 7%;
+    left: 15%;
+    transform: rotate(0deg);
+    transform-origin: left center;
+}
+
+.svg-curve {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    pointer-events: none;
+    z-index: 9;
+}  
+  
+.arrow-hoi {
+    width: 40%;
+    bottom: 25%;
+    left: 50%;
+    transform: rotate(20deg) scaleX(-1);
+    transform-origin: left center;
+}
+
+.arrow-nang {
+    width: 40%;
+    bottom: 70%;
+    left: 50%;
+    transform: rotate(70deg);
+    transform-origin: left center;
+}
+
+.arrow-nga {
+    width: 40%;
+    bottom: 35%;
+    left: 50%;
+    transform: rotate(-5deg) skewX(-10deg);
+    transform-origin: left center;
+}
+
+@media screen and (max-width: 768px) {
+    .css-arrow {
+        width: 60%;
+        bottom: 12%;
+    }
 }
