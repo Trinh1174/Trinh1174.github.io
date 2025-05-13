@@ -162,11 +162,11 @@ a {
 
 @media screen and (max-width: 768px) {
 	.classes {
-		font-size: 1.8rem;
+		font-size: 1.6rem;
 	}
 
 	.classes:hover {
-		font-size: 1.6rem;
+		font-size: 1.4rem;
 	}
 
     .home-button {
