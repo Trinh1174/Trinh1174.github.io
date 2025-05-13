@@ -17,7 +17,6 @@ body {
 
 .title-bar h1 {
     margin: 0;
-    font-size: 2rem;
 }
 
 .home-button {
@@ -26,13 +25,14 @@ body {
     top: 50%;
     transform: translateY(-50%);
     padding: 1rem 1.2rem;
-    font-size: 1.2rem;
+    font-size: 5rem;
 }
 
 h1 {
     text-align: center;
     color: #ff69b4; /* hot pink */
     margin-bottom: 2rem;
+	font-size: 4rem;
 }
 
 table {
@@ -53,13 +53,17 @@ th, td {
 thead {
     background-color: #87cefa; /* light sky blue */
     color: white;
-    font-size: 1.1rem;
+    font-size: 2rem;
 }
 
 thead th {
     text-align: center !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+}
+
+tbody {
+	font-size: 1.5rem;
 }
 
 th:nth-child(1), td:nth-child(1) {
@@ -76,6 +80,18 @@ th:nth-child(3), td:nth-child(3) {
 }
 
 @media screen and (max-width: 768px) {
+	h1 {
+		font-size: 2rem;
+	}
+
+	thead {
+		font-size: 1.2rem;
+	}
+
+	tbody {
+		font-size: 1rem;
+	}
+
     th:nth-child(1), td:nth-child(1) {
         width: 30%;
     }
@@ -120,33 +136,39 @@ a {
     color: white;
     border-radius: 8px;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     transition: background-color 0.3s ease;
 }
 
 .button-link:hover {
     background-color: #6495ed;
-    font-size: 1rem;
+    font-size: 1.4rem;
 }
 
 .phonetic:hover {
     text-decoration: underline;
 }
 
-@media screen and (max-width: 768px) {
-    .home-button {
-        font-size: 0.8rem;
-    }
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+	margin-top: 10rem;
 }
 
+
 .tones-title {
-    text-align: center;
     font-size: 2rem;
-    margin-bottom: 1.5rem;
     font-weight: bold;
     display: flex;
     justify-content: center;
-    gap: 2rem; /* spacing between tones */
+    gap: 2rem;
     flex-wrap: wrap;
 }
 
@@ -167,8 +189,18 @@ a {
 .tone-nang  { color: #ff7dd9; }
 .tone-nga   { color: #ff3d3d; }
 
+.tone span {
+    font-size: 3rem; /* Bigger for 'Ma' */
+    display: block;
+}
+
+.tone-name {
+    font-size: 1.5rem; /* Smaller for tone name */
+    margin-top: 0.2rem;
+}
+
 .image-container {
-    position: relative;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -177,7 +209,7 @@ a {
 .image-container img {
     max-width: 100%;
     height: auto;
-    object-fit: contain;
+    display: block;
 }
 
 #bridge-img {
@@ -245,8 +277,8 @@ a {
     display: none;
     pointer-events: none;
     z-index: 9;
-}  
-  
+}
+
 .arrow-hoi {
     width: 40%;
     bottom: 25%;

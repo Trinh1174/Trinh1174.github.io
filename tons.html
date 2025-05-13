@@ -7,46 +7,48 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="title-bar">
-        <h1>Học tiếng Việt</h1>
-        <a href="index.html" class="button-link home-button">🏠</a>
-    </div>
-    <div class="tones-title">
-        <div class="tone tone-huyen" data-tone="huyen">
-            <span>Mà</span>
-            <div class="tone-name">Huyền</div>
-        </div>
-        <div class="tone tone-sac" data-tone="sac">
-            <span>Má</span>
-            <div class="tone-name">Sắc</div>
-        </div>
-        <div class="tone tone-ngang" data-tone="ngang">
-            <span>Ma</span>
-            <div class="tone-name">Ngang</div>
-        </div>
-        <div class="tone tone-hoi" data-tone="hoi">
-            <span>Mả</span>
-            <div class="tone-name">Hỏi</div>
-        </div>
-        <div class="tone tone-nang" data-tone="nang">
-            <span>Mạ</span>
-            <div class="tone-name">Nặng</div>
-        </div>
-        <div class="tone tone-nga" data-tone="nga">
-            <span>Mã</span>
-            <div class="tone-name">Ngã</div>
-        </div>
-    </div>
+	<div class="title-bar">
+		<h1>Học tiếng Việt</h1>
+		<a href="index.html" class="button-link home-button">🏠</a>
+	</div>
+	<div class="content-wrapper">
+		<div class="tones-title">
+			<div class="tone tone-huyen" data-tone="huyen">
+				<span>Mà</span>
+				<div class="tone-name">Huyền</div>
+			</div>
+			<div class="tone tone-sac" data-tone="sac">
+				<span>Má</span>
+				<div class="tone-name">Sắc</div>
+			</div>
+			<div class="tone tone-ngang" data-tone="ngang">
+				<span>Ma</span>
+				<div class="tone-name">Ngang</div>
+			</div>
+			<div class="tone tone-hoi" data-tone="hoi">
+				<span>Mả</span>
+				<div class="tone-name">Hỏi</div>
+			</div>
+			<div class="tone tone-nang" data-tone="nang">
+				<span>Mạ</span>
+				<div class="tone-name">Nặng</div>
+			</div>
+			<div class="tone tone-nga" data-tone="nga">
+				<span>Mã</span>
+				<div class="tone-name">Ngã</div>
+			</div>
+		</div>
 
-    <div class="image-container">
-        <img src="pont-tons.png" alt="Default" class="tone-image" id="default" style="display: block;">
-        <img src="huyen.png" alt="Huyen" class="tone-image" id="huyen" style="display: none;">
-        <img src="sac.png" alt="Sac" class="tone-image" id="sac" style="display: none;">
-        <img src="ngang.png" alt="Ngang" class="tone-image" id="ngang" style="display: none;">
-        <img src="hoi.png" alt="Hoi" class="tone-image" id="hoi" style="display: none;">
-        <img src="nang.png" alt="Nang" class="tone-image" id="nang" style="display: none;">
-        <img src="nga.png" alt="Nga" class="tone-image" id="nga" style="display: none;">
-    </div>
+		<div class="image-container">
+			<img src="res/pont-tons.png" alt="Default" class="tone-image" id="default" style="display: block;">
+			<img src="res/huyen.png" alt="Huyen" class="tone-image" id="huyen" style="display: none;">
+			<img src="res/sac.png" alt="Sac" class="tone-image" id="sac" style="display: none;">
+			<img src="res/ngang.png" alt="Ngang" class="tone-image" id="ngang" style="display: none;">
+			<img src="res/hoi.png" alt="Hoi" class="tone-image" id="hoi" style="display: none;">
+			<img src="res/nang.png" alt="Nang" class="tone-image" id="nang" style="display: none;">
+			<img src="res/nga.png" alt="Nga" class="tone-image" id="nga" style="display: none;">
+		</div>
+	</div>
 
     <script>
         document.querySelectorAll('.tone').forEach(tone => {
