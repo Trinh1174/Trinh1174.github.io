@@ -235,5 +235,28 @@
             </tbody>
         </table>
     </div>
+
+    <button id="scrollTopBtn" title="Retour en haut">↑</button>
+
+    <script>
+        const scrollBtn = document.getElementById("scrollTopBtn");
+    
+        // Show the button when scrolling down
+        window.onscroll = function () {
+            if (window.scrollY > 200) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        };
+
+        // Scroll to top smoothly on click
+        scrollBtn.onclick = function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        };
+    </script>    
 </body>
 </html>
