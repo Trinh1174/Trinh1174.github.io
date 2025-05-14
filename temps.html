@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Clock</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="title-bar">
+		<h1>Học tiếng Việt</h1>
+		<a href="index.html" class="button-link home-button">🏠</a>
+	</div>
+    <div class="clock-container">
+        <div id="clock">
+            <div id="hour-hand" class="hand hour-hand"></div>
+            <div id="minute-hand" class="hand minute-hand"></div>
+            <div id="second-hand" class="hand second-hand"></div>
+            <div id="center-dot"></div>
+        </div>
+        <div id="time-text"></div>
+    </div>
+
+    <script>
+        let customTime = null;
+
+        function updateClock() {
+            const now = customTime || new Date();
+            const hours = now.getHours() % 12;
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const hourDeg = (hours * 30) + (minutes * 0.5);
+            const minuteDeg = (minutes * 6) + (seconds * 0.1);
+            const secondDeg = seconds * 6;
+
+            document.getElementById('hour-hand').style.transform = `translate(-50%, -100%) rotate(${hourDeg}deg)`;
+            document.getElementById('minute-hand').style.transform = `translate(-50%, -100%) rotate(${minuteDeg}deg)`;
+            document.getElementById('second-hand').style.transform = `translate(-50%, -100%) rotate(${secondDeg}deg)`;
+
+            const timeText = `${now.getHours()} heures, ${now.getMinutes()} minutes et ${now.getSeconds()} secondes`;
+            document.getElementById('time-text').textContent = timeText;
+        }
+
+        function rotateHand(event, handId) {
+            const clock = document.getElementById('clock');
+            const rect = clock.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            const angle = Math.atan2(event.clientY - centerY, event.clientX - centerX) * (180 / Math.PI) + 90;
+            const normalizedAngle = (angle + 360) % 360;
+
+            document.getElementById(handId).style.transform = `translate(-50%, -100%) rotate(${normalizedAngle}deg)`;
+
+            customTime = customTime || new Date();
+
+            if (handId === 'hour-hand') {
+                const hours = Math.round(normalizedAngle / 30) % 12;
+                customTime.setHours(hours);
+            } else if (handId === 'minute-hand') {
+                const minutes = Math.round(normalizedAngle / 6) % 60;
+                customTime.setMinutes(minutes);
+            } else if (handId === 'second-hand') {
+                const seconds = Math.round(normalizedAngle / 6) % 60;
+                customTime.setSeconds(seconds);
+            }
+
+            updateClock();
+        }
+
+        ['hour-hand', 'minute-hand', 'second-hand'].forEach((id) => {
+            document.getElementById(id).addEventListener('mousedown', (event) => {
+                customTime = customTime || new Date();
+                const moveHandler = (e) => rotateHand(e, id);
+                document.addEventListener('mousemove', moveHandler);
+                document.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', moveHandler);
+                }, { once: true });
+            });
+        });
+
+        setInterval(() => {
+            if (!customTime) {
+                updateClock();
+            }
+        }, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
