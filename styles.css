@@ -163,12 +163,13 @@ a {
 
 @media screen and (max-width: 768px) {
 	.classes {
-		font-size: 2.1rem;
+        width: 23rem;
+        font-size: 4rem;
 	}
 
-	.classes:hover {
-		font-size: 1.9rem;
-	}
+    .classes:hover {
+        font-size: 3.6rem;
+    }
 
     .home-button {
 		font-size: 1.2rem;
