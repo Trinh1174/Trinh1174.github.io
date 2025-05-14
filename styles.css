@@ -54,6 +54,7 @@ table {
     background: white;
     overflow: hidden;
     border-radius: 12px;
+    margin-bottom: 2rem;
 }
 
 th, td {
