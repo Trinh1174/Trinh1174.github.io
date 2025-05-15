@@ -220,12 +220,21 @@ a {
 
 .classes-button:hover {
     background-color: #6495ed;
-    font-size: 2rem;
+    font-size: 1.8rem;
+    width: 39%;
+    height: 2.9rem;
 }
 
 @media screen and (max-width: 768px) {
     .classes-button {
-        width: 100%;
+        width: 92%;
+        font-size: 1.8rem;
+    }
+
+    .classes-button:hover {
+        font-size: 1.7rem;
+        width: 90%;
+        height: 2.9rem;
     }
 
     .home-button {
