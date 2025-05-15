@@ -368,20 +368,23 @@ a {
 
 @media screen and (max-width: 768px) {
     #clock {
-        width: 65vw;               /* Responsive width */
-        height: 65vw; 
+        width: 63vw;
+        height: 63vw; 
     }
 
     .hour-hand {
-        height: 13vh;
+        width: 0.4rem;
+        height: 8vh;
     }
-    
+
     .minute-hand {
-        height: 20vh;
+        width: 0.25rem;
+        height: 11vh;
     }
-    
+
     .second-hand {
-        height: 27vh;
+        width: 0.1rem;
+        height: 14vh;
     }
 }
 
