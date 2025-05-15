@@ -199,6 +199,7 @@ a {
 }
 
 .classes-wrapper {
+    width: 80vw;
     height: 50rem;
     overflow-y: auto;
     display: flex;
@@ -212,7 +213,7 @@ a {
 }
 
 .classes-button {
-    width: 25rem;
+    width: 40%;
     height: 3rem;
     font-size: 2rem;
 }
@@ -224,11 +225,7 @@ a {
 
 @media screen and (max-width: 768px) {
     .classes-button {
-        font-size: 5rem;
-    }
-
-    .classes-button:hover {
-        font-size: 3.8rem;
+        width: 100%;
     }
 
     .home-button {
