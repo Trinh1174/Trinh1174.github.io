@@ -157,6 +157,7 @@ a {
 }
 
 #scrollTopBtn {
+    user-select: none;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -197,23 +198,22 @@ a {
     transition: background-color 0.3s ease;
 }
 
-.classes {
+.classes-button {
     font-size: 2rem;
 }
 
-.classes:hover {
+.classes-button:hover {
     background-color: #6495ed;
     font-size: 1.8rem;
 }
 
 @media screen and (max-width: 768px) {
-    .classes {
-        width: 23rem;
-        font-size: 3rem;
+    .classes-button {
+        font-size: 4rem;
     }
 
-    .classes:hover {
-        font-size: 2.7rem;
+    .classes-button:hover {
+        font-size: 3.6rem;
     }
 
     .home-button {
