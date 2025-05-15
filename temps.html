@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Clock</title>
+    <title>Học tiếng Việt</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,19 +12,27 @@
 		<a href="index.html" class="button-link home-button">🏠</a>
 	</div>
     <div class="clock-container">
-        <div id="clock">
-            <div id="hour-hand" class="hand hour-hand"></div>
-            <div id="minute-hand" class="hand minute-hand"></div>
-            <div id="second-hand" class="hand second-hand"></div>
-            <div id="center-dot"></div>
+        <div class="clock-block">
+            <div id="clock">
+                <div id="hour-hand" class="hand hour-hand" title="Cliquer pour bouger les aiguilles"></div>
+                <div id="minute-hand" class="hand minute-hand" title="Cliquer pour bouger les aiguilles"></div>
+                <div id="second-hand" class="hand second-hand" title="Cliquer pour bouger les aiguilles"></div>
+                <div id="center-dot"></div>
+            </div>
+            <div id="time-text" contenteditable="true" spellcheck="false" title="Cliquer pour modifier l'heure (format HH:MM:SS)"></div>
         </div>
-        <div id="time-text"></div>
+        <div class="text-block">
+            <div id="vietnamese-text" class="vietnamese-time"></div>
+        </div>
     </div>
 
     <script>
         let customTime = null;
+        let isEditingTime = false;
 
         function updateClock() {
+            if (isEditingTime) return;
+
             const now = customTime || new Date();
             const hours = now.getHours() % 12;
             const minutes = now.getMinutes();
@@ -38,8 +46,108 @@
             document.getElementById('minute-hand').style.transform = `translate(-50%, -100%) rotate(${minuteDeg}deg)`;
             document.getElementById('second-hand').style.transform = `translate(-50%, -100%) rotate(${secondDeg}deg)`;
 
-            const timeText = `${now.getHours()} heures, ${now.getMinutes()} minutes et ${now.getSeconds()} secondes`;
+            const pad = (num) => String(num).padStart(2, '0');
+            const timeText = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
             document.getElementById('time-text').textContent = timeText;
+
+            const fullHour = now.getHours();
+            const minute = now.getMinutes();
+            const second = now.getSeconds();
+
+            const vietnameseHours = [
+                "Mười hai", "Một", "Hai", "Ba", "Bốn", "Năm",
+                "Sáu", "Bảy", "Tám", "Chín", "Mười", "Mười một"
+            ];
+
+            const vietnameseMinutes = [
+                "không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín",
+                "mười", "mười một", "mười hai", "mười ba", "mười bốn", "mười lăm",
+                "mười sáu", "mười bảy", "mười tám", "mười chín", "hai mươi", "hai mươi mốt",
+                "hai mươi hai", "hai mươi ba", "hai mươi tư", "hai mươi lăm", "hai mươi sáu",
+                "hai mươi bảy", "hai mươi tám", "hai mươi chín", "ba mươi", "ba mươi mốt",
+                "ba mươi hai", "ba mươi ba", "ba mươi tư", "ba mươi lăm", "ba mươi sáu",
+                "ba mươi bảy", "ba mươi tám", "ba mươi chín", "bốn mươi", "bốn mươi mốt",
+                "bốn mươi hai", "bốn mươi ba", "bốn mươi tư", "bốn mươi lăm", "bốn mươi sáu",
+                "bốn mươi bảy", "bốn mươi tám", "bốn mươi chín", "năm mươi", "năm mươi mốt",
+                "năm mươi hai", "năm mươi ba", "năm mươi tư", "năm mươi lăm", "năm mươi sáu",
+                "năm mươi bảy", "năm mươi tám", "năm mươi chín"
+            ];
+
+            const vietnameseSeconds = vietnameseMinutes;
+
+            // Determine time of day
+            let timeOfDay = "";
+            if (fullHour >= 0 && fullHour < 5) {
+                timeOfDay = "đêm";
+            } else if (fullHour >= 5 && fullHour < 11) {
+                timeOfDay = "sáng";
+            } else if (fullHour >= 11 && fullHour < 13) {
+                timeOfDay = "trưa";
+            } else if (fullHour >= 13 && fullHour < 18) {
+                timeOfDay = "chiều";
+            } else if (fullHour >= 18 && fullHour < 22) {
+                timeOfDay = "tối";
+            } else {
+                timeOfDay = "đêm";
+            }
+
+            // Get 12-hour display
+            let displayHour = fullHour % 12;
+            if (displayHour === 0) displayHour = 12;
+            const nextHour = (displayHour % 12) + 1;
+
+            let vietnameseHour = vietnameseHours[displayHour % 12];
+            const vietnameseNextHour = vietnameseHours[nextHour % 12];
+            const vietnameseMinute = vietnameseMinutes[minute];
+            const vietnameseSecond = vietnameseSeconds[second];
+
+            // Special case: nửa đêm
+            const isMidnight = fullHour === 0 && minute === 0 && second === 0;
+            if (isMidnight) {
+                vietnameseHour = "Nửa đêm";
+            }
+
+            // === Full formal version ===
+            let vietnameseTextFull = `<strong>${vietnameseHour}</strong>`;
+            if (!isMidnight) vietnameseTextFull += ` giờ ${timeOfDay}`;
+            if (minute > 0) vietnameseTextFull += ` <strong>${vietnameseMinute}</strong> phút`;
+            if (second > 0) vietnameseTextFull += ` <strong>${vietnameseSecond}</strong> giây`;
+            vietnameseTextFull += ".";
+
+            // === Spoken version ===
+            let vietnameseTextSpoken = "";
+            if (minute === 30) {
+                vietnameseTextSpoken = `<strong>${vietnameseHour}</strong> giờ ${timeOfDay} <strong>rưỡi</strong>`;
+            } else if (minute === 45) {
+                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ ${timeOfDay} <strong>kém ${vietnameseMinutes[15]}</strong>`;
+            } else if (minute === 50) {
+                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ ${timeOfDay} <strong>kém ${vietnameseMinutes[10]}</strong>`;
+            } else if (minute === 55) {
+                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ ${timeOfDay} <strong>kém ${vietnameseMinutes[5]}</strong>`;
+            } else {
+                vietnameseTextSpoken = `<strong>${vietnameseHour}</strong>`;
+                if (!isMidnight) vietnameseTextSpoken += ` giờ ${timeOfDay}`;
+                if (minute > 0) vietnameseTextSpoken += ` <strong>${vietnameseMinute}</strong> phút`;
+            }
+            if (second > 0) vietnameseTextSpoken += ` <strong>${vietnameseSecond}</strong> giây`;
+            vietnameseTextSpoken += ".";
+
+            // === Display block with stable layout ===
+            const block = document.getElementById('vietnamese-text');
+
+            if (vietnameseTextFull === vietnameseTextSpoken) {
+                block.innerHTML = `
+                    <div style="min-height: 1.6em;">
+                        ${vietnameseTextFull}
+                    </div>
+                    <div style="visibility: hidden; height: 1.6em;">
+                        (invisible filler)
+                    </div>`;
+            } else {
+                block.innerHTML = `
+                    <div><em>Đầy đủ:</em> ${vietnameseTextFull}</div>
+                    <div><em>Thân mật:</em> ${vietnameseTextSpoken}</div>`;
+            }
         }
 
         function rotateHand(event, handId) {
@@ -79,6 +187,47 @@
                 }, { once: true });
             });
         });
+
+        const timeInput = document.getElementById('time-text');
+
+        // User starts editing: pause updates
+        timeInput.addEventListener('focus', () => {
+            isEditingTime = true;
+        });
+
+        // On blur or Enter: apply changes and resume updates
+        function parseManualTime() {
+            const text = timeInput.textContent.trim();
+            const match = text.match(/^(\d{1,2}):(\d{1,2}):(\d{1,2})$/);
+
+            if (match) {
+                const h = parseInt(match[1]);
+                const m = parseInt(match[2]);
+                const s = parseInt(match[3]);
+
+                if (
+                    h >= 0 && h <= 23 &&
+                    m >= 0 && m <= 59 &&
+                    s >= 0 && s <= 59
+                ) {
+                    customTime = new Date();
+                    customTime.setHours(h, m, s);
+                }
+            }
+
+            isEditingTime = false;
+            updateClock(); // always reflect parsed time
+        }
+
+        timeInput.addEventListener('blur', parseManualTime);
+
+        timeInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // prevent new line
+                timeInput.blur();   // triggers parse + resume
+            }
+        });
+
 
         setInterval(() => {
             if (!customTime) {
