@@ -326,7 +326,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 80vh;   /* Take full viewport height */
+    height: 75vh;   /* Take full viewport height */
 }
 
 #clock {
