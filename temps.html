@@ -108,29 +108,27 @@
             }
 
             // === Full formal version ===
-            let vietnameseTextFull = `<strong>${vietnameseHour}</strong>`;
-            if (!isMidnight) vietnameseTextFull += ` giờ ${timeOfDay}`;
+            let vietnameseTextFull = `<strong>${vietnameseHour}</strong> giờ`;
             if (minute > 0) vietnameseTextFull += ` <strong>${vietnameseMinute}</strong> phút`;
             if (second > 0) vietnameseTextFull += ` <strong>${vietnameseSecond}</strong> giây`;
-            vietnameseTextFull += ".";
+            vietnameseTextFull += ` ${timeOfDay}.`;
 
             // === Spoken version ===
             let vietnameseTextSpoken = "";
             if (minute === 30) {
-                vietnameseTextSpoken = `<strong>${vietnameseHour}</strong> giờ ${timeOfDay} <strong>rưỡi</strong>`;
+                vietnameseTextSpoken = `<strong>${vietnameseHour}</strong> giờ <strong>rưỡi</strong>`;
             } else if (minute === 45) {
-                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ ${timeOfDay} <strong>kém ${vietnameseMinutes[15]}</strong>`;
+                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ <strong>kém ${vietnameseMinutes[15]}</strong>`;
             } else if (minute === 50) {
-                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ ${timeOfDay} <strong>kém ${vietnameseMinutes[10]}</strong>`;
+                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ <strong>kém ${vietnameseMinutes[10]}</strong>`;
             } else if (minute === 55) {
-                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ ${timeOfDay} <strong>kém ${vietnameseMinutes[5]}</strong>`;
+                vietnameseTextSpoken = `<strong>${vietnameseNextHour}</strong> giờ <strong>kém ${vietnameseMinutes[5]}</strong>`;
             } else {
-                vietnameseTextSpoken = `<strong>${vietnameseHour}</strong>`;
-                if (!isMidnight) vietnameseTextSpoken += ` giờ ${timeOfDay}`;
+                vietnameseTextSpoken = `<strong>${vietnameseHour}</strong> giờ`;
                 if (minute > 0) vietnameseTextSpoken += ` <strong>${vietnameseMinute}</strong> phút`;
             }
             if (second > 0) vietnameseTextSpoken += ` <strong>${vietnameseSecond}</strong> giây`;
-            vietnameseTextSpoken += ".";
+            vietnameseTextSpoken += ` ${timeOfDay}.`;
 
             // === Display block with stable layout ===
             const block = document.getElementById('vietnamese-text');
