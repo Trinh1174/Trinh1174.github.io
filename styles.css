@@ -1,4 +1,9 @@
 /* styles.css */
+
+/**********************\
+| ----- ALL.html ----- |
+\**********************/
+
 body {
     font-family: Arial, sans-serif;
     background: #fff0f5; /* light pink background */
@@ -69,6 +74,73 @@ h2 {
     margin-bottom: 1rem;
     font-size: 2rem;
 }
+
+.button-link {
+    padding: 1rem 1rem;
+    background-color: #87cefa;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/************************\
+| ----- index.html ----- |
+\************************/
+
+.classes-wrapper {
+    width: 100%; /* ✅ toute la largeur pour un centrage pur */
+    max-width: 800px; /* ✅ limite la largeur pour éviter d'étirer trop */
+    margin: 4rem auto 0 auto; /* ✅ centrage horizontal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.classes-button {
+    width: 60%; /* ou 40%, mais bien visible */
+    font-size: 1.9rem;
+    padding: 0.8rem 1rem;
+    text-align: center;
+    margin: 0 auto;
+    border: none;
+    border-radius: 8px;
+    background-color: #87cefa;
+    color: white;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.classes-button:hover {
+    background-color: #6495ed;
+    font-size: 1.8rem;
+    width: 58%;
+}
+
+@media screen and (max-width: 768px) {
+    .classes-button {
+        width: 92%;
+        font-size: 3rem;
+        height: auto;
+        min-height: 3.5rem;
+        padding: 0.8rem 1rem;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .classes-button:hover {
+        font-size: 2.9rem;
+        width: 90%;
+    }
+}
+
+/***************************\
+| ----- alphabet.html ----- |
+\***************************/
 
 table {
     width: 100%;
@@ -203,68 +275,13 @@ a {
     transform: scale(1.1);
 }
 
-.button-link {
-    padding: 1rem 1rem;
-    background-color: #87cefa;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.classes-wrapper {
-    width: 100%; /* ✅ toute la largeur pour un centrage pur */
-    max-width: 800px; /* ✅ limite la largeur pour éviter d'étirer trop */
-    margin: 4rem auto 0 auto; /* ✅ centrage horizontal */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.classes-button {
-    width: 60%; /* ou 40%, mais bien visible */
-    font-size: 1.9rem;
-    padding: 0.8rem 1rem;
-    text-align: center;
-    margin: 0 auto;
-    border: none;
-    border-radius: 8px;
-    background-color: #87cefa;
-    color: white;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.classes-button:hover {
-    background-color: #6495ed;
-    font-size: 1.8rem;
-    width: 58%;
-}
-
-@media screen and (max-width: 768px) {
-    .classes-button {
-        width: 92%;
-        font-size: 3rem;
-        height: auto;
-        min-height: 3.5rem;
-        padding: 0.8rem 1rem;
-        white-space: normal;
-        text-align: center;
-    }
-
-    .classes-button:hover {
-        font-size: 2.9rem;
-        width: 90%;
-    }
-}
-
 .phonetic:hover {
     text-decoration: underline;
 }
+
+/***********************\
+| ----- tons.html ----- |
+\***********************/
 
 .content-wrapper {
     display: flex;
