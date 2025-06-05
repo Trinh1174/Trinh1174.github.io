@@ -11,6 +11,13 @@
 		<h1>Học tiếng Việt</h1>
 		<a href="index.html" class="button-link home-button">🏠</a>
 	</div>
+
+	<div class="switch-bar">
+        <button id="btn-heure" class="switch-btn active">Heure</button>
+        <button id="btn-dates" class="switch-btn">Dates</button>
+        <button id="btn-autres" class="switch-btn">Autres</button>
+    </div>
+
     <div class="clock-container">
         <div class="clock-block">
             <div id="clock">
@@ -26,7 +33,34 @@
         </div>
     </div>
 
+	<div class="date-container" style="display:none;">
+        <div class="text-block">
+            <p>🚧 En cours de développement 🚧</p>
+        </div>
+    </div>
+
+    <div class="autres-container" style="display:none;">
+        <div class="text-block">
+            <p>🚧 En cours de développement 🚧</p>
+        </div>
+    </div>
+
     <script>
+
+		function showSection(section) {
+            document.querySelector('.clock-container').style.display = section === 'heure' ? '' : 'none';
+            document.querySelector('.date-container').style.display = section === 'dates' ? '' : 'none';
+            document.querySelector('.autres-container').style.display = section === 'autres' ? '' : 'none';
+
+            document.getElementById('btn-heure').classList.toggle('active', section === 'heure');
+            document.getElementById('btn-dates').classList.toggle('active', section === 'dates');
+            document.getElementById('btn-autres').classList.toggle('active', section === 'autres');
+        }
+
+        document.getElementById('btn-heure').onclick = () => showSection('heure');
+        document.getElementById('btn-dates').onclick = () => showSection('dates');
+        document.getElementById('btn-autres').onclick = () => showSection('autres');
+
         let customTime = null;
         let isEditingTime = false;
 

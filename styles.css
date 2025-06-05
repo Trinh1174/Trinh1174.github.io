@@ -15,9 +15,31 @@ body {
 .title-bar {
     user-select: none;
     position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 2rem;
+}
+
+.logs-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  text-decoration: none;
+  background-color: #fff !important;
+  color: black !important;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.logs-button:hover {
+  background-color: #fce4ec !important;
+  transform: scale(1.05);
 }
 
 .title-bar h1 {
@@ -62,7 +84,7 @@ body {
 h1, h2 {
     text-align: center;
     color: #ff69b4; /* hot pink */
-    
+
 }
 
 h1 {
@@ -83,6 +105,7 @@ h2 {
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
+
 
 /************************\
 | ----- index.html ----- |
@@ -137,6 +160,140 @@ h2 {
         width: 90%;
     }
 }
+
+
+/**************************\
+| ----- clavier.html ----- |
+\**************************/
+
+.vietnamese-keyboard-container {
+  margin-top: 6rem;
+}
+
+.input-container-clavier {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 50rem;
+  flex-wrap: wrap;
+}
+
+.input-container-clavier .vietnamese-input {
+  flex: 1;
+  margin: 0;
+}
+
+.input-container-clavier .copy-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.copy-btn {
+  background-color: #fce4ec;
+  border-color: #f88fc0;
+}
+
+.copy-btn:hover {
+  background-color: #fdd6e5;
+}
+
+.copy-toast {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
+  background-color: #f06292;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 999;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.vk-btn {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.25rem;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.vk-btn:hover {
+  background-color: #fce4ec;
+  transform: scale(1.05);
+}
+
+.vietnamese-input {
+  width: 90%;
+  max-width: 40rem;
+  padding: 1rem 1.5rem;
+  margin: 2rem auto;
+  display: block;
+  font-size: 1.25rem;
+  border: 0.15rem solid #ccc;
+  border-radius: 0.75rem;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.vietnamese-input:focus {
+  outline: none;
+  border-color: #f88fc0;
+  box-shadow: 0 0 0.3rem #f88fc0;
+}
+
+@media screen and (max-width: 600px) {
+  .vk-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 1rem;
+  }
+
+  .vietnamese-input {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .row {
+    gap: 0.4rem;
+  }
+
+  .copy-toast {
+    top: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
 
 /***************************\
 | ----- alphabet.html ----- |
@@ -348,7 +505,7 @@ a {
     .tone span {
         font-size: 2.5rem;
     }
-    
+
     .tone-name {
         font-size: 1rem;
     }
@@ -370,6 +527,32 @@ a {
 /************************\
 | ----- temps.html ----- |
 \************************/
+
+.switch-bar {
+    display: flex;
+    gap: 1em;
+    margin: 1em 0;
+    justify-content: center;
+}
+
+.switch-btn {
+    padding: 0.5em 1.5em;
+    border: none;
+    background: #87cefa;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background 0.2s;
+	color: #fff;
+}
+
+.switch-btn:hover {
+	background: #6495ed;
+}
+
+.switch-btn.active {
+    background: #6495ed;
+}
 
 .clock-container {
     position: relative;
@@ -429,7 +612,7 @@ a {
 @media screen and (max-width: 768px) {
     #clock {
         width: 63vw;
-        height: 63vw; 
+        height: 63vw;
     }
 
     .hour-hand {
