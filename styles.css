@@ -135,7 +135,7 @@ h2 {
     border: 0.1rem solid #ccc;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
     transition: background-color 0.2s ease;
 }
 
@@ -589,6 +589,8 @@ a {
 | ----- temps.html ----- |
 \************************/
 
+/* ----- Heure ----- */
+
 .switch-bar {
     display: flex;
     gap: 1em;
@@ -751,3 +753,145 @@ a {
         text-align: center;
     }
 }
+
+/* ----- Date ----- */
+
+/* ----------------------------------------------------------
+   2.1 Style pour le conteneur général du date-picker
+----------------------------------------------------------- */
+.date-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;       /* espace au-dessus et en-dessous */
+    padding: 1rem;
+    max-width: 800px;        /* largeur maxi du conteneur rose */
+    background-color: #fce4ec;/* rose pâle identique à .logs-container */
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Centre et définit la largeur du calendrier */
+  .calendar-wrapper {
+    width: 100%;
+    max-width: 700px;        /* assez large pour 7 colonnes (≈ 100px chacune) */
+    margin: 0 auto;
+    
+    /* PAS de padding horizontal à l’intérieur ! 
+       Si vous aviez déjà un padding-left ou padding-right, 
+       le tableau perd de la place. */
+  }
+  
+  /* ----------------------------------------------------------
+     2.2 Header du calendrier (mois + boutons nav)
+  ----------------------------------------------------------- */
+  .cal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .cal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #e91e63;         /* rose vif pour le titre du mois */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .cal-header button {
+    background-color: #80d8ff; /* bleu clair, comme vos autres boutons */
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .cal-header button:hover {
+    background-color: #40c4ff; /* un peu plus foncé au survol */
+  }
+  
+  /* ----------------------------------------------------------
+     2.3 Tableau du calendrier (cases des jours)
+  ----------------------------------------------------------- */
+  /* Étape 1 : on force le tableau à 100% de la largeur de son parent */
+  .cal-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;     /* obliger chaque colonne à se partager l’espace à égalité */
+    margin: 0 auto;
+  }
+  
+  /* Étape 2 : on donne à THEAD et TBODY la même règle de cellule */
+  .cal-table thead th,
+  .cal-table tbody td {
+    width: 14.285714%;   /* 100% ÷ 7 ; on répète ici pour être explicite */
+    padding: 0;          /* on gère le padding plus bas, si nécessaire */
+    box-sizing: border-box; /* important si vous ajoutez des bordures ou padding */
+  }
+  
+  /* En-tête du tableau (jours de la semaine) */
+  .cal-table thead th {
+    background-color: #f8bbd0; /* rose légèrement soutenu */
+    color: #333;
+    padding: 0.5rem;            /* on ajoute un padding uniforme */
+    border: 1px solid #ddd; 
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+  }
+  
+  /* Cases normales (numéros de jour) */
+  .cal-table tbody td {
+    height: 3rem;               /* hauteur fixe pour chaque case */
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #eee;
+    background-color: #ffffff;  /* blanc pour chaque case */
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    user-select: none;          /* empêche de sélectionner le texte par accident */
+    padding: 0;                 /* on gère la hauteur seulement par `height` */
+    box-sizing: border-box;
+  }
+  
+  .cal-table tbody td:hover {
+    background-color: #fdeef8;  /* rose très pâle au survol */
+  }
+  
+  /* Case du jour “aujourd’hui” */
+  .cal-table .today {
+    background-color: #ff80ab;  /* rose moyen pour marquer le jour courant */
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  /* Case de la date cliquée (sélectionnée) */
+  .cal-table .selected {
+    background-color: #e91e63;  /* rose vif pour la case sélectionnée */
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  /* Cases vides (avant le 1er et après le dernier jour du mois) */
+  .cal-table .blank {
+    background-color: #fce4ec;  /* rose pâle identique au fond du conteneur */
+    cursor: default;
+  }
+  
+  /* ----------------------------------------------------------
+     2.4 Texte de la date choisie, juste en dessous du calendrier
+  ----------------------------------------------------------- */
+  .vietnamese-date {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #555;
+    font-weight: bold;
+    text-align: center;
+  }
+  
