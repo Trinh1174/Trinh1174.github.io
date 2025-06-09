@@ -189,7 +189,7 @@ h2 {
     color: #333;
     margin-right: 0.5rem;
 }
-  
+
 .log-text {
     color: #555;
 }
@@ -756,52 +756,37 @@ a {
 
 /* ----- Date ----- */
 
-/* ----------------------------------------------------------
-   2.1 Style pour le conteneur général du date-picker
------------------------------------------------------------ */
 .date-container {
     display: flex;
     justify-content: center;
-    margin: 1rem auto;       /* espace au-dessus et en-dessous */
+    margin: 1rem auto;
     padding: 1rem;
-    max-width: 800px;        /* largeur maxi du conteneur rose */
-    background-color: #fce4ec;/* rose pâle identique à .logs-container */
-    border: 0.1rem solid #ccc;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Centre et définit la largeur du calendrier */
-  .calendar-wrapper {
+    max-width: 800px;
+}
+
+.calendar-wrapper {
     width: 100%;
-    max-width: 700px;        /* assez large pour 7 colonnes (≈ 100px chacune) */
+    max-width: 700px;
     margin: 0 auto;
-    
-    /* PAS de padding horizontal à l’intérieur ! 
-       Si vous aviez déjà un padding-left ou padding-right, 
-       le tableau perd de la place. */
-  }
-  
-  /* ----------------------------------------------------------
-     2.2 Header du calendrier (mois + boutons nav)
-  ----------------------------------------------------------- */
-  .cal-header {
+}
+
+.cal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
-  }
-  
-  .cal-header h3 {
+}
+
+.cal-header h3 {
     margin: 0;
     font-size: 1.25rem;
-    color: #e91e63;         /* rose vif pour le titre du mois */
+    color: #e91e63;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-  }
-  
-  .cal-header button {
-    background-color: #80d8ff; /* bleu clair, comme vos autres boutons */
+}
+
+.cal-header button {
+    background-color: #80d8ff;
     border: none;
     color: #fff;
     font-size: 1rem;
@@ -809,89 +794,121 @@ a {
     border-radius: 0.25rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
-  }
-  
-  .cal-header button:hover {
-    background-color: #40c4ff; /* un peu plus foncé au survol */
-  }
-  
-  /* ----------------------------------------------------------
-     2.3 Tableau du calendrier (cases des jours)
-  ----------------------------------------------------------- */
-  /* Étape 1 : on force le tableau à 100% de la largeur de son parent */
-  .cal-table {
+}
+
+.cal-header button:hover {
+    background-color: #40c4ff;
+}
+
+.cal-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;     /* obliger chaque colonne à se partager l’espace à égalité */
+    table-layout: fixed;
     margin: 0 auto;
-  }
-  
-  /* Étape 2 : on donne à THEAD et TBODY la même règle de cellule */
-  .cal-table thead th,
-  .cal-table tbody td {
-    width: 14.285714%;   /* 100% ÷ 7 ; on répète ici pour être explicite */
-    padding: 0;          /* on gère le padding plus bas, si nécessaire */
-    box-sizing: border-box; /* important si vous ajoutez des bordures ou padding */
-  }
-  
-  /* En-tête du tableau (jours de la semaine) */
-  .cal-table thead th {
-    background-color: #f8bbd0; /* rose légèrement soutenu */
+}
+
+.cal-table thead th,
+.cal-table tbody td {
+    width: 14.285714%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cal-table thead th {
+    background-color: #f8bbd0;
     color: #333;
-    padding: 0.5rem;            /* on ajoute un padding uniforme */
-    border: 1px solid #ddd; 
+    padding: 0.5rem;
+    border: 1px solid #ddd;
     font-weight: normal;
     text-transform: uppercase;
     font-size: 0.9rem;
     box-sizing: border-box;
-  }
-  
-  /* Cases normales (numéros de jour) */
-  .cal-table tbody td {
-    height: 3rem;               /* hauteur fixe pour chaque case */
+}
+
+.cal-table tbody td {
+    height: 3.5rem;
     text-align: center;
     vertical-align: middle;
     border: 1px solid #eee;
-    background-color: #ffffff;  /* blanc pour chaque case */
+    background-color: #ffffff;
     cursor: pointer;
     transition: background-color 0.15s ease;
-    user-select: none;          /* empêche de sélectionner le texte par accident */
-    padding: 0;                 /* on gère la hauteur seulement par `height` */
+    user-select: none;
+    padding: 0;
     box-sizing: border-box;
-  }
-  
-  .cal-table tbody td:hover {
-    background-color: #fdeef8;  /* rose très pâle au survol */
-  }
-  
-  /* Case du jour “aujourd’hui” */
-  .cal-table .today {
-    background-color: #ff80ab;  /* rose moyen pour marquer le jour courant */
+}
+
+.cal-table tbody td:hover {
+    background-color: #fdeef8;
+}
+
+.cal-table .blank.prev-month,
+.cal-table .blank.next-month {
+  color: #bbb;
+  background-color: #f9f9f9;
+  cursor: default;
+}
+
+.cal-table .blank.prev-month:hover,
+.cal-table .blank.next-month:hover {
+  background-color: #f9f9f9;
+}
+
+.cal-table .today {
+    background-color: #ff80ab;
     color: #fff;
     font-weight: bold;
-  }
-  
-  /* Case de la date cliquée (sélectionnée) */
-  .cal-table .selected {
-    background-color: #e91e63;  /* rose vif pour la case sélectionnée */
+}
+
+.cal-table .selected {
+    background-color: #e91e63;
     color: #fff;
     font-weight: bold;
-  }
-  
-  /* Cases vides (avant le 1er et après le dernier jour du mois) */
-  .cal-table .blank {
-    background-color: #fce4ec;  /* rose pâle identique au fond du conteneur */
+}
+
+.cal-table .blank {
+    background-color: #fce4ec;
     cursor: default;
-  }
-  
-  /* ----------------------------------------------------------
-     2.4 Texte de la date choisie, juste en dessous du calendrier
-  ----------------------------------------------------------- */
-  .vietnamese-date {
+}
+
+.vietnamese-date {
     margin-top: 1rem;
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: #555;
-    font-weight: bold;
     text-align: center;
-  }
-  
+}
+
+#year-select {
+	display: none;
+}
+
+.month-year {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5ch;
+  color: #e91e63;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.year-dropdown {
+  /* on enlève tout l’habillage natif */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* pour masquer la flèche sous Windows/IE */
+.year-dropdown::-ms-expand {
+  display: none;
+}
