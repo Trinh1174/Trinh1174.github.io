@@ -590,6 +590,42 @@ a {
     display: block;
 }
 
+
+/**************************\
+| ----- chiffre.html ----- |
+\**************************/
+
+.chiffre-table th:nth-child(1), .chiffre-table td:nth-child(1) {
+    width: 25%;
+}
+
+.chiffre-table th:nth-child(2), .chiffre-table td:nth-child(2) {
+    width: 25%;
+}
+
+.chiffre-table th:nth-child(3), .chiffre-table td:nth-child(3) {
+    width: 25%;
+}
+
+.chiffre-table th:nth-child(4), .chiffre-table td:nth-child(4) {
+    width: 25%;
+}
+
+@media screen and (max-width: 768px) {
+    .chiffre-table th:nth-child(1), 
+    .chiffre-table td:nth-child(1) {
+        width: 45%;
+        padding-right: 0.3rem;
+    }
+    
+    .chiffre-table th:nth-child(2), 
+    .chiffre-table td:nth-child(2) {
+        width: 55%;
+        padding-left: 0.3rem;
+    }
+}
+
+
 /************************\
 | ----- temps.html ----- |
 \************************/

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học tiếng Việt</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="title-bar">
+        <h1>Học tiếng Việt</h1>
+        <a href="index.html" class="button-link home-button">🏠</a>
+    </div>
+
+    <div class="main-container">
+        <table class="chiffre-table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Traduction</th>
+                    <th>Nombre</th>
+                    <th>Traduction</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>Không</td>
+                    <td>19</td>
+                    <td>Mười chín</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Một</td>
+                    <td>20</td>
+                    <td>Hai mươi</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Hai</td>
+                    <td>21</td>
+                    <td>Hai mươi một</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Ba</td>
+                    <td>22</td>
+                    <td>Hai mươi hai</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Bốn</td>
+                    <td>33</td>
+                    <td>Ba mươi ba</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Năm</td>
+                    <td>44</td>
+                    <td>Bốn mươi tư</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Sáu</td>
+                    <td>55</td>
+                    <td>Năm mươi lăm</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Bảy</td>
+                    <td>66</td>
+                    <td>Sáu mươi sáu</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Tám</td>
+                    <td>77</td>
+                    <td>Bảy mươi bảy</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Chín</td>
+                    <td>88</td>
+                    <td>Tám mươi tám</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Mười</td>
+                    <td>90</td>
+                    <td>Chín mươi chín</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Mười một</td>
+                    <td>100</td>
+                    <td>Một trăm</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Mười hai</td>
+                    <td>101</td>
+                    <td>Một trăm</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Mười ba</td>
+                    <td>111</td>
+                    <td>Một trăm lẻ một</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Mười bốn</td>
+                    <td>200</td>
+                    <td>Hai trăm</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Mười lăm</td>
+                    <td>1000</td>
+                    <td>Một ngàn</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Mười sáu</td>
+                    <td>1001</td>
+                    <td>Một ngàn lẻ một</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Mười bảy</td>
+                    <td>1010</td>
+                    <td>Một ngàn lẻ mười</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Mười tám</td>
+                    <td>2000</td>
+                    <td>Hai ngàn</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>1'000'000</td>
+                    <td>Một triệu</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>1'000'000'000</td>
+                    <td>Một tỷ</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button id="scrollTopBtn" title="Retour en haut">↑</button>
+
+    <script>
+        const scrollBtn = document.getElementById("scrollTopBtn");
+    
+        // Show the button when scrolling down
+        window.onscroll = function () {
+            if (window.scrollY > 200) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        };
+
+        // Scroll to top smoothly on click
+        scrollBtn.onclick = function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        };
+    </script>
+</body>
+</html>
