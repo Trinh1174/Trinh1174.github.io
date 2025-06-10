@@ -933,3 +933,9 @@ a {
 .year-dropdown::-ms-expand {
   display: none;
 }
+
+@media screen and (max-width: 768px) {
+    .month-year {
+        font-size: 1rem;
+    }
+}
