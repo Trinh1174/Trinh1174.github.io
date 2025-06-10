@@ -231,6 +231,11 @@ h2 {
   margin-top: 6rem;
 }
 
+.maj-btn.active {
+    background-color: #fdd6e5;
+    color: white;
+}
+
 .input-container-clavier {
   display: flex;
   justify-content: center;
@@ -610,7 +615,7 @@ a {
 }
 
 .switch-btn:hover {
-	background: #6495ed;
+	background: #40c4ff;
 }
 
 .switch-btn.active {
@@ -771,6 +776,7 @@ a {
 }
 
 .cal-header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -878,8 +884,23 @@ a {
     text-align: center;
 }
 
+.month-year,
 #year-select {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#year-select {
+    font-size: 1.2rem;
+    margin-top: 10%;
 	display: none;
+    padding: 0.35rem 0.6rem;
+    width: 6rem;
+    cursor: pointer;
+    z-index: 1000;
 }
 
 .month-year {

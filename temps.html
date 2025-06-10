@@ -14,8 +14,8 @@
 
 	<div class="switch-bar">
         <button id="btn-heure" class="switch-btn active">Heure</button>
-        <button id="btn-dates" class="switch-btn">Dates</button>
-        <button id="btn-autres" class="switch-btn">Autres</button>
+        <button id="btn-dates" class="switch-btn">Date</button>
+        <button id="btn-autres" class="switch-btn">Autre</button>
     </div>
 
     <div class="clock-container">
@@ -37,12 +37,12 @@
         <div class="calendar-wrapper">
           <!-- 1) En-tête du mois en vietnamien + boutons de navigation -->
 			<div class="cal-header">
-				<button id="prev-month">&laquo;</button>
+				<button id="prev-month" title="Cliquer pour changer le mois">&laquo;</button>
 				<!-- Titre pour mois + année -->
-				<h3 id="month-year" class="month-year"></h3>
+				<h3 id="month-year" class="month-year" title="Cliquer pour changer l'année"></h3>
 				<!-- Toujours un select pour l'année -->
-				<select id="year-select"></select>
-				<button id="next-month">&raquo;</button>
+				<select id="year-select" title="Cliquer pour changer l'année"></select>
+				<button id="next-month" title="Cliquer pour changer le mois">&raquo;</button>
 			</div>
 
 
@@ -59,13 +59,11 @@
                 <th>DIM</th>
               </tr>
             </thead>
-            <tbody id="calendar-body">
+            <tbody id="calendar-body" title="Cliquer pour changer la date">
               <!-- Le JavaScript injectera ici les <tr><td>…</td></tr> -->
             </tbody>
           </table>
 
-          <!-- 3) Sous le calendrier, la phrase en vietnamien qui s’affiche
-                 dès qu’on clique sur un jour -->
           <p id="date-display" class="vietnamese-date"></p>
         </div>
     </div>
@@ -305,247 +303,256 @@
     <script>
         // 1) Jours de la semaine en vietnamien (0 = dimanche … 6 = samedi)
         const vietnameseWeekdays = [
-        "Chủ Nhật",
-        "Thứ Hai",
-        "Thứ Ba",
-        "Thứ Tư",
-        "Thứ Năm",
-        "Thứ Sáu",
-        "Thứ Bảy"
+            "Chủ Nhật",
+            "Thứ Hai",
+            "Thứ Ba",
+            "Thứ Tư",
+            "Thứ Năm",
+            "Thứ Sáu",
+            "Thứ Bảy"
         ];
 
         // 2) Mois en vietnamien (déjà préfixés par "Tháng ...")
         const monthNamesVietnamese = [
-        "Tháng Một",
-        "Tháng Hai",
-        "Tháng Ba",
-        "Tháng Tư",
-        "Tháng Năm",
-        "Tháng Sáu",
-        "Tháng Bảy",
-        "Tháng Tám",
-        "Tháng Chín",
-        "Tháng Mười",
-        "Tháng Mười Một",
-        "Tháng Mười Hai"
+            "Tháng Một",
+            "Tháng Hai",
+            "Tháng Ba",
+            "Tháng Tư",
+            "Tháng Năm",
+            "Tháng Sáu",
+            "Tháng Bảy",
+            "Tháng Tám",
+            "Tháng Chín",
+            "Tháng Mười",
+            "Tháng Mười Một",
+            "Tháng Mười Deux"
         ];
 
         // 3) Variables globales pour suivre le mois et l’année affichés
         let currentYear, currentMonth; // currentMonth : 0 = janvier … 11 = décembre
 
         // 4) Références aux éléments DOM
-		const monthYearElem = document.getElementById("month-year");
-		const yearSelect    = document.getElementById("year-select");
-        const calendarBody   = document.getElementById("calendar-body");
-        const prevBtn        = document.getElementById("prev-month");
-        const nextBtn        = document.getElementById("next-month");
-        const dateDisplay    = document.getElementById("date-display");
+        const monthYearElem = document.getElementById("month-year");
+        const yearSelect    = document.getElementById("year-select");
+        const calendarBody  = document.getElementById("calendar-body");
+        const prevBtn       = document.getElementById("prev-month");
+        const nextBtn       = document.getElementById("next-month");
+        const dateDisplay   = document.getElementById("date-display");
 
-		// Quand on clique sur le titre, on passe en mode édition année
-		monthYearElem.addEventListener("click", () => {
-			monthYearElem.style.display = "none";
-			yearSelect.style.display   = "inline-block";
-			yearSelect.focus();
-		});
+        // 5) Fonctions helper pour montrer / cacher le sélecteur d'année
+        function showYearSelect() {
+            monthYearElem.style.display = "none";
+            yearSelect.style.display    = "inline-flex";
+            yearSelect.setAttribute("size", 10);   // affiche 10 années
+            yearSelect.focus();
 
-		// À la sélection ou sortie du select, on remet à jour et on revient au titre
-		yearSelect.addEventListener("change", () => {
-			currentYear = parseInt(yearSelect.value);
-			buildCalendar(currentYear, currentMonth);
-			showTodayDateText();
-		});
-
-		yearSelect.addEventListener("blur", () => {
-			yearSelect.style.display    = "none";
-			monthYearElem.style.display = "inline-block";
-		});
-
-        // 5) Initialisation dès que la page est complètement chargée
-        document.addEventListener("DOMContentLoaded", function() {
-        // Récupérer la date d’aujourd’hui
-        const today = new Date();
-        currentYear  = today.getFullYear();
-        currentMonth = today.getMonth();
-
-		populateYearSelect(currentYear);
-		attachSelectListeners();
-
-        // Construire le calendrier pour le mois/année actuels
-        buildCalendar(currentYear, currentMonth);
-
-		// Afficher la date du jour par défaut
-        showTodayDateText();
-
-        // Écouteurs sur les flèches “‹” et “›”
-        prevBtn.addEventListener("click", () => {
-            currentMonth--;
-            if (currentMonth < 0) {
-            currentMonth = 11;
-            currentYear--;
+            const opt = yearSelect.querySelector(`option[value="${currentYear}"]`);
+            if (opt) {
+                // block:"center" will center that option in the visible area
+                opt.scrollIntoView({ block: "center" });
             }
+        }
+
+        function hideYearSelect() {
+            yearSelect.removeAttribute("size");
+            yearSelect.style.display    = "none";
+            monthYearElem.style.display = "inline-flex";
+        }
+
+        // 6) Événements pour le switch <h3> ↔ <select>
+        monthYearElem.addEventListener("click", showYearSelect);
+
+        yearSelect.addEventListener("blur", hideYearSelect);
+
+        yearSelect.addEventListener("change", () => {
+            currentYear = parseInt(yearSelect.value);
             buildCalendar(currentYear, currentMonth);
-			showTodayDateText();
+            showTodayDateText();
+            hideYearSelect();
         });
 
-        nextBtn.addEventListener("click", () => {
-            currentMonth++;
-            if (currentMonth > 11) {
-            currentMonth = 0;
-            currentYear++;
+        // 7) Initialisation
+        document.addEventListener("DOMContentLoaded", () => {
+            const today      = new Date();
+            currentYear      = today.getFullYear();
+            currentMonth     = today.getMonth();
+
+            populateYearSelect(currentYear);
+            yearSelect.value = currentYear;
+
+            prevBtn.addEventListener("click", () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                buildCalendar(currentYear, currentMonth);
+                showTodayDateText();
+            });
+
+            nextBtn.addEventListener("click", () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                buildCalendar(currentYear, currentMonth);
+                showTodayDateText();
+            });
+
+            buildCalendar(currentYear, currentMonth);
+            showTodayDateText();
+        });
+
+        // 8) Remplir le <select> des années
+        function populateYearSelect(centerYear) {
+            const range = 150;
+            for (let y = centerYear - range; y <= centerYear + range; y++) {
+                const opt = document.createElement("option");
+                opt.value       = y;
+                opt.textContent = y;
+                yearSelect.appendChild(opt);
             }
-            buildCalendar(currentYear, currentMonth);
-			showTodayDateText();
-        });
-        });
+        }
 
-		function populateYearSelect(centerYear) {
-			const yearSelect = document.getElementById("year-select");
-			const range = 150; // +/- 10 ans autour de l'année courante
-			for (let y = centerYear - range; y <= centerYear + range; y++) {
-				const opt = document.createElement("option");
-				opt.value = y;
-				opt.textContent = y;
-				yearSelect.appendChild(opt);
-			}
-		}
+        const digitWords = [
+            "không","một","hai","ba","bốn",
+            "năm","sáu","bảy","tám","chín"
+        ];
 
-		function attachSelectListeners() {
-			const ys = document.getElementById("year-select");
+        function numberToVietnamese(n) {
+            if (n < 10) return digitWords[n];
+            if (n === 10) return "mười";
+            if (n < 20) return "mười " + digitWords[n % 10];
+            const tens = Math.floor(n / 10), unit = n % 10;
+            let str = digitWords[tens] + " mươi";
+            if      (unit === 0) return str;
+            else if (unit === 1) str += " mốt";
+            else if (unit === 5) str += " lăm";
+            else                 str += " " + digitWords[unit];
+            return str;
+        }
 
-			// position initiale
-			ys.value = currentYear;
+        function yearToVietnamese(y) {
+            const thou = Math.floor(y / 1000),
+                rem1 = y % 1000,
+                hund = Math.floor(rem1 / 100),
+                rem2 = rem1 % 100,
+                ten  = Math.floor(rem2 / 10),
+                unit = rem2 % 10;
 
-			ys.addEventListener("change", () => {
-				currentYear = parseInt(ys.value);
-				buildCalendar(currentYear, currentMonth);
-				showTodayDateText();
-		});
+            const parts = [];
+            // milliers
+            if (thou > 0) {
+            parts.push(numberToVietnamese(thou), "ngàn");
+            }
+            // centaines
+            if (hund > 0) {
+            parts.push(numberToVietnamese(hund), "trăm");
+            } else if (ten === 0 && unit > 0) {
+            // 2001 → “lẻ”
+            parts.push("lẻ");
+            }
+            // dizaines
+            if (ten > 1) {
+            parts.push(numberToVietnamese(ten), "mươi");
+            } else if (ten === 1) {
+            parts.push("mười");
+            }
+            // unités
+            if (unit > 0) {
+            let w = digitWords[unit];
+            if      (unit === 1 && ten >= 2) w = "mốt";
+            else if (unit === 5 && ten >= 1) w = "lăm";
+            parts.push(w);
+            }
+            return parts.join(" ");
+        }
 
-		// Garder vos flèches pour navigation rapide
-		prevBtn.addEventListener("click", () => {
-				currentMonth--;
-				if (currentMonth < 0) {
-				currentMonth = 11;
-				currentYear--;
-				}
-				syncSelectsAndRebuild();
-		});
-
-		nextBtn.addEventListener("click", () => {
-				currentMonth++;
-				if (currentMonth > 11) {
-				currentMonth = 0;
-				currentYear++;
-				}
-				syncSelectsAndRebuild();
-			});
-		}
-
-		function syncSelectsAndRebuild() {
-			document.getElementById("month-select").value = currentMonth;
-			document.getElementById("year-select").value  = currentYear;
-			buildCalendar(currentYear, currentMonth);
-			showTodayDateText();
-		}
-
-		// Fonction pour afficher la date du jour dans le texte vietnamien
+        // 9) Afficher la date du jour en vietnamien
         function showTodayDateText() {
-			const today = new Date();
-     		const weekdayIndex = today.getDay();
-        	const d = today.getDate(),
-			m = today.getMonth() + 1,
-			y = today.getFullYear();
-			const vietText =
-				`<strong>${vietnameseWeekdays[weekdayIndex]}</strong>, ngày <strong>${d}</strong> tháng <strong>${m}</strong> năm <strong>${y}</strong>`;
-			dateDisplay.innerHTML = vietText;
-		}
+            const t         = new Date(),
+                wdIdx     = t.getDay(),
+                d         = t.getDate(),
+                m         = t.getMonth() + 1,
+                y         = t.getFullYear(),
+                dayWord   = numberToVietnamese(d),
+                monthWord = numberToVietnamese(m),
+                yearWord  = yearToVietnamese(y);
 
-		function buildCalendar(year, month) {
-			// 1) Vider l'ancien contenu
-			calendarBody.innerHTML = "";
+            dateDisplay.innerHTML =
+            `<strong>${vietnameseWeekdays[wdIdx]}</strong>, ngày ` +
+            `<strong>${dayWord}</strong> tháng ` +
+            `<strong>${monthWord}</strong> năm ` +
+            `<strong>${yearWord}</strong>`;
+        }
 
-			// 2) Calcul du premier jour (Lundi = 0 … Dimanche = 6)
-			let firstDay = new Date(year, month, 1).getDay();      // 0 = dimanche
-			firstDay = (firstDay === 0) ? 6 : firstDay - 1;        // décaler
+        // 10) Construire le calendrier
+        function buildCalendar(year, month) {
+            calendarBody.innerHTML = "";
+            let firstDay = new Date(year, month, 1).getDay();
+            firstDay = firstDay === 0 ? 6 : firstDay - 1;
 
-			// 3) Jours dans le mois courant ET précédent
-			const daysInMonth       = new Date(year, month + 1, 0).getDate();
-			const daysInPrevMonth   = new Date(year, month, 0).getDate();
+            const dim      = new Date(year, month + 1, 0).getDate(),
+                dp       = new Date(year, month, 0).getDate(),
+                total    = 42;
+            let row, dayC = 1, nextD = 1;
 
-			// 4) Total cases
-			const totalCells = 42;
+            for (let i = 0; i < total; i++) {
+            if (i % 7 === 0) {
+                row = document.createElement("tr");
+                calendarBody.appendChild(row);
+            }
+            const cell = document.createElement("td");
+            if (i < firstDay) {
+                cell.textContent = dp - (firstDay - 1 - i);
+                cell.classList.add("blank","prev-month");
+            }
+            else if (dayC <= dim) {
+                cell.textContent = dayC;
+                const t = new Date();
+                if (
+                dayC === t.getDate() &&
+                month === t.getMonth() &&
+                year  === t.getFullYear()
+                ) cell.classList.add("today");
 
-			// 5) Génération
-			let row, dayCounter = 1, nextMonthDay = 1;
-			for (let i = 0; i < totalCells; i++) {
-				if (i % 7 === 0) {
-				row = document.createElement("tr");
-				calendarBody.appendChild(row);
-				}
+                (function(d,m,y,el){
+                el.addEventListener("click", ()=>selectDate(d,m,y,el));
+                })(dayC, month, year, cell);
+                dayC++;
+            }
+            else {
+                cell.textContent = nextD++;
+                cell.classList.add("blank","next-month");
+            }
+            row.appendChild(cell);
+            }
+            monthYearElem.textContent =
+            `${monthNamesVietnamese[month]} ${year}`;
+        }
 
-				const cell = document.createElement("td");
+        // 11) Quand on clique sur une date du calendrier
+        function selectDate(d,m,y,cellElem) {
+            const prev = document.querySelector(".cal-table .selected");
+            if (prev) prev.classList.remove("selected");
+            cellElem.classList.add("selected");
 
-				if (i < firstDay) {
-				// avant le 1ᵉʳ, on prend la fin du mois précédent
-				const day = daysInPrevMonth - (firstDay - 1 - i);
-				cell.textContent = day;
-				cell.classList.add("blank", "prev-month");
-				}
-				else if (dayCounter <= daysInMonth) {
-				// jours du mois courant
-				cell.textContent = dayCounter;
+            const wdi     = new Date(y,m,d).getDay(),
+                dayW    = numberToVietnamese(d),
+                monthW  = numberToVietnamese(m+1),
+                yearW   = yearToVietnamese(y);
 
-				// marquer aujourd’hui
-				const today = new Date();
-				if (
-					dayCounter === today.getDate() &&
-					month === today.getMonth() &&
-					year === today.getFullYear()
-				) cell.classList.add("today");
+            dateDisplay.innerHTML =
+            `<strong>${vietnameseWeekdays[wdi]}</strong>, ngày ` +
+            `<strong>${dayW}</strong> tháng ` +
+            `<strong>${monthW}</strong> năm ` +
+            `<strong>${yearW}</strong>`;
 
-				// clic
-				(function(d, m, y, elt) {
-					elt.addEventListener("click", () => selectDate(d, m, y, elt));
-				})(dayCounter, month, year, cell);
-
-				dayCounter++;
-				}
-				else {
-				// après la fin du mois : jours du mois suivant
-				cell.textContent = nextMonthDay++;
-				cell.classList.add("blank", "next-month");
-				}
-
-				row.appendChild(cell);
-			}
-
-			// 6) Mettre à jour le titre mois + année
-			monthYearElem.textContent = `${monthNamesVietnamese[month]} ${year}`;
-		}
-
-        // 7) Fonction appelée quand on clique sur une date (d, m, y)
-        function selectDate(d, m, y, cellElem) {
-			// 7.1) Retirer “selected” de la case qui en avait déjà
-			const prevSel = document.querySelector(".cal-table tbody .selected");
-			if (prevSel) {
-				prevSel.classList.remove("selected");
-			}
-
-			// 7.2) Ajouter “selected” à la cellule cliquée
-			cellElem.classList.add("selected");
-
-			// 7.3) Construire la phrase vietnamienne du type :
-			// “Thứ Sáu, ngày 06 tháng 06 năm 2025”
-			const clickedDate = new Date(y, m, d);
-			const weekdayIndex = clickedDate.getDay(); // 0 = dimanche
-
-			const vietText =
-				`<strong>${vietnameseWeekdays[weekdayIndex]}</strong>, ngày <strong>${d}</strong> tháng <strong>${m + 1}</strong> năm <strong>${y}</strong>`;
-
-			// 7.4) Injecter dans le <p id="date-display">
-			dateDisplay.innerHTML = vietText;
+            hideYearSelect();
         }
     </script>
+
 
 
 </body>

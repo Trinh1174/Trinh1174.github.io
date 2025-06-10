@@ -14,6 +14,7 @@
 
 	<div class="vietnamese-keyboard-container"></div>
 		<div class="input-container-clavier">
+			<button id="maj-btn" class="vk-btn maj-btn" onclick="toggleMaj()">Maj</button>
 			<input type="text" id="vietnamese-input" class="vietnamese-input" placeholder="Nhập văn bản..." spellcheck="false">
 			<button class="vk-btn copy-btn" onclick="copyText()">📋 Copier</button>
 		</div>
@@ -23,70 +24,70 @@
 
 			<!-- Row 1: Vietnamese vowels and tones -->
 			<div class="row">
-				<button class="vk-btn" onclick="insertChar('ă')">ă</button>
-				<button class="vk-btn" onclick="insertChar('â')">â</button>
-				<button class="vk-btn" onclick="insertChar('ê')">ê</button>
-				<button class="vk-btn" onclick="insertChar('ô')">ô</button>
-				<button class="vk-btn" onclick="insertChar('ơ')">ơ</button>
-				<button class="vk-btn" onclick="insertChar('ư')">ư</button>
-				<button class="vk-btn" onclick="addTone('sắc')">´</button>
-				<button class="vk-btn" onclick="addTone('huyền')">`</button>
-				<button class="vk-btn" onclick="addTone('hỏi')">?</button>
-				<button class="vk-btn" onclick="addTone('ngã')">~</button>
-				<button class="vk-btn" onclick="addTone('nặng')">.</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ă')">ă</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('â')">â</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ê')">ê</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ô')">ô</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ơ')">ơ</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ư')">ư</button>
+				<button class="vk-btn vk-letter" onclick="addTone('sắc')">´</button>
+				<button class="vk-btn vk-letter" onclick="addTone('huyền')">`</button>
+				<button class="vk-btn vk-letter" onclick="addTone('hỏi')">?</button>
+				<button class="vk-btn vk-letter" onclick="addTone('ngã')">~</button>
+				<button class="vk-btn vk-letter" onclick="addTone('nặng')">.</button>
 			</div>
 
 			<!-- Row 2 -->
 			<div class="row">
-				<button class="vk-btn" onclick="insertChar('q')">q</button>
-				<button class="vk-btn" onclick="insertChar('w')">w</button>
-				<button class="vk-btn" onclick="insertChar('e')">e</button>
-				<button class="vk-btn" onclick="insertChar('r')">r</button>
-				<button class="vk-btn" onclick="insertChar('t')">t</button>
-				<button class="vk-btn" onclick="insertChar('y')">y</button>
-				<button class="vk-btn" onclick="insertChar('u')">u</button>
-				<button class="vk-btn" onclick="insertChar('i')">i</button>
-				<button class="vk-btn" onclick="insertChar('o')">o</button>
-				<button class="vk-btn" onclick="insertChar('p')">p</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('q')">q</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('w')">w</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('e')">e</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('r')">r</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('t')">t</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('y')">y</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('u')">u</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('i')">i</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('o')">o</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('p')">p</button>
 			</div>
 
 			<!-- Row 3 -->
 			<div class="row">
-				<button class="vk-btn" onclick="insertChar('a')">a</button>
-				<button class="vk-btn" onclick="insertChar('s')">s</button>
-				<button class="vk-btn" onclick="insertChar('d')">d</button>
-				<button class="vk-btn" onclick="insertChar('f')">f</button>
-				<button class="vk-btn" onclick="insertChar('g')">g</button>
-				<button class="vk-btn" onclick="insertChar('h')">h</button>
-				<button class="vk-btn" onclick="insertChar('j')">j</button>
-				<button class="vk-btn" onclick="insertChar('k')">k</button>
-				<button class="vk-btn" onclick="insertChar('l')">l</button>
-				<button class="vk-btn" onclick="insertChar('đ')">đ</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('a')">a</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('s')">s</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('d')">d</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('f')">f</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('g')">g</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('h')">h</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('j')">j</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('k')">k</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('l')">l</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('đ')">đ</button>
 			</div>
 
 			<!-- Row 4 -->
 			<div class="row">
-				<button class="vk-btn" onclick="insertChar('z')">z</button>
-				<button class="vk-btn" onclick="insertChar('x')">x</button>
-				<button class="vk-btn" onclick="insertChar('c')">c</button>
-				<button class="vk-btn" onclick="insertChar('v')">v</button>
-				<button class="vk-btn" onclick="insertChar('b')">b</button>
-				<button class="vk-btn" onclick="insertChar('n')">n</button>
-				<button class="vk-btn" onclick="insertChar('m')">m</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('z')">z</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('x')">x</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('c')">c</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('v')">v</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('b')">b</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('n')">n</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('m')">m</button>
 			</div>
 
 			<!-- Row 5: Vietnamese digraphs -->
 			<div class="row">
-				<button class="vk-btn" onclick="insertChar('ch')">ch</button>
-				<button class="vk-btn" onclick="insertChar('gh')">gh</button>
-				<button class="vk-btn" onclick="insertChar('gi')">gi</button>
-				<button class="vk-btn" onclick="insertChar('kh')">kh</button>
-				<button class="vk-btn" onclick="insertChar('ng')">ng</button>
-				<button class="vk-btn" onclick="insertChar('ngh')">ngh</button>
-				<button class="vk-btn" onclick="insertChar('nh')">nh</button>
-				<button class="vk-btn" onclick="insertChar('ph')">ph</button>
-				<button class="vk-btn" onclick="insertChar('th')">th</button>
-				<button class="vk-btn" onclick="insertChar('tr')">tr</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ch')">ch</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('gh')">gh</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('gi')">gi</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('kh')">kh</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ng')">ng</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ngh')">ngh</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('nh')">nh</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('ph')">ph</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('th')">th</button>
+				<button class="vk-btn vk-letter" onclick="insertChar('tr')">tr</button>
 			</div>
 
 		</div>
@@ -109,14 +110,31 @@
 			'ư':  { 'sắc': 'ứ', 'huyền': 'ừ', 'hỏi': 'ử', 'ngã': 'ữ', 'nặng': 'ự' },
 			'y':  { 'sắc': 'ý', 'huyền': 'ỳ', 'hỏi': 'ỷ', 'ngã': 'ỹ', 'nặng': 'ỵ' }
 		};
+
+		function updateKeyboardLetters() {
+			const letterButtons = document.querySelectorAll('.vk-letter');
+			letterButtons.forEach(btn => {
+				// btn.textContent is always the lower case in your HTML, but the value to insert could be upper.
+				// We use the button's onclick to get the char. But it's simpler to use the initial value.
+				let baseChar = btn.getAttribute('data-base');
+				if (!baseChar) {
+					// Save the original char in a data attribute the first time.
+					baseChar = btn.textContent;
+					btn.setAttribute('data-base', baseChar);
+				}
+				btn.textContent = isMaj ? baseChar.toUpperCase() : baseChar.toLowerCase();
+			});
+		}
 	
 		function insertChar(char) {
+			if (isMaj) {
+				char = char.toUpperCase();
+			}
 			const input = document.getElementById('vietnamese-input');
 			const start = input.selectionStart;
-			const end = input.selectionEnd;
-			const text = input.value;
-	
-			// Insère le caractère ou le digraphe à la position du curseur
+			const end   = input.selectionEnd;
+			const text  = input.value;
+
 			input.value = text.slice(0, start) + char + text.slice(end);
 			input.focus();
 			input.selectionStart = input.selectionEnd = start + char.length;
@@ -127,57 +145,53 @@
 			const input = document.getElementById('vietnamese-input');
 			const text = input.value;
 			if (!text || !lastChar) return;
-	
-			// 1) Vérifier si lastChar est le digraphe "gi" (éventuellement déjà toné, par ex. "gí")
+
+			// Check if we need to preserve uppercase
+			const isUpperCase = lastChar === lastChar.toUpperCase();
+			// Use lowercase for lookups
+			const lcLastChar = lastChar.toLowerCase();
+
+			// 1) Check if lastChar is "gi" digraph (maybe already with tone)
 			let isGi = false;
 			let prefix = '';
 			let vowelPart = '';
-	
-			if (lastChar.length >= 2 && lastChar[0] === 'g') {
-				// On prend tout ce qui suit le 'g' comme "vowelPart"
-				vowelPart = lastChar.slice(1); 
-				// Si vowelPart est 'i' ou une version tonée de 'i', on traite comme "gi"
+
+			if (lcLastChar.length >= 2 && lcLastChar[0] === 'g') {
+				vowelPart = lcLastChar.slice(1); 
 				const allItones = Object.values(toneMap['i']);
 				if (vowelPart === 'i' || allItones.includes(vowelPart)) {
 					isGi = true;
-					prefix = 'g';
+					prefix = isUpperCase ? 'G' : 'g';
 				}
 			}
-	
+
 			if (isGi) {
-				// On trouve la nouvelle voyelle tonée pour 'i'
 				const newVowel = toneMap['i'][tone];
 				if (!newVowel) return;
-	
-				// On cherche la dernière occurrence de lastChar dans le texte
+
 				const idx = text.lastIndexOf(lastChar);
 				if (idx !== -1) {
-					// Reconstruit la chaîne : tout avant "gi"/"gí"/etc, puis "g" + newVowel, puis tout après
+					const finalVowel = isUpperCase ? newVowel.toUpperCase() : newVowel;
 					input.value =
 						text.substring(0, idx) +
-						prefix + newVowel +
+						prefix + finalVowel +
 						text.substring(idx + lastChar.length);
 					input.focus();
-					// On place le curseur juste après le nouveau digraphe toné
 					input.selectionStart = input.selectionEnd = idx + prefix.length + 1;
-					// Met à jour lastChar (ex. "gĩ", "gì", "gí", etc.)
-					lastChar = prefix + newVowel;
+					lastChar = prefix + finalVowel;
 				}
 				return;
 			}
-	
-			// 2) Cas « lettre simple » : lastChar peut être déjà toné (ex. "ó") ou non (ex. "o").
-			// On détermine sa base non-tonée en fouillant toneMap.
+
+			// 2) Single letter case
 			let baseLetter = null;
 			for (const b in toneMap) {
-				// Si lastChar correspond déjà à la lettre de base
-				if (b === lastChar) {
+				if (b === lcLastChar) {
 					baseLetter = b;
 					break;
 				}
-				// Sinon, on cherche parmi les valeurs tonées de toneMap[b]
 				for (const tName in toneMap[b]) {
-					if (toneMap[b][tName] === lastChar) {
+					if (toneMap[b][tName] === lcLastChar) {
 						baseLetter = b;
 						break;
 					}
@@ -185,12 +199,15 @@
 				if (baseLetter) break;
 			}
 			if (!baseLetter) return;
-	
-			// On récupère la nouvelle version tonée de cette base
-			const newChar = toneMap[baseLetter][tone];
+
+			let newChar = toneMap[baseLetter][tone];
 			if (!newChar) return;
-	
-			// Remplace la dernière occurrence de lastChar par newChar
+
+			// Apply uppercase if needed
+			if (isUpperCase) {
+				newChar = newChar.toUpperCase();
+			}
+
 			const idx2 = text.lastIndexOf(lastChar);
 			if (idx2 !== -1) {
 				input.value =
@@ -203,6 +220,17 @@
 			}
 		}
 	
+		let isMaj = false;
+
+		function toggleMaj() {
+		isMaj = !isMaj;
+		document.getElementById('maj-btn')
+				.classList.toggle('active', isMaj);
+		updateKeyboardLetters();
+		// keep focus on the input:
+		document.getElementById('vietnamese-input').focus();
+		}
+
 		function copyText() {
 			const input = document.getElementById('vietnamese-input');
 			if (!input.value) return;
