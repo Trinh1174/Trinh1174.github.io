@@ -935,7 +935,7 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-    .month-year {
+    .cal-header h3 {
         font-size: 1rem;
     }
 }
