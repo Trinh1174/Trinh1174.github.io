@@ -121,7 +121,8 @@ h2 {
 
 .classes-button:hover {
     background-color: #6495ed;
-    font-size: 1.8rem;
+    /* font-size: 1.8rem; */
+	transform: scale(0.99);
     width: 58%;
 }
 
@@ -147,7 +148,7 @@ h2 {
 @media screen and (max-width: 768px) {
     .classes-button {
         width: 92%;
-        font-size: 3rem;
+        font-size: 4rem;
         height: auto;
         min-height: 3.5rem;
         padding: 0.8rem 1rem;
@@ -156,9 +157,13 @@ h2 {
     }
 
     .classes-button:hover {
-        font-size: 2.9rem;
+        font-size: 3.9rem;
         width: 90%;
     }
+
+	.logs-button {
+		font-size: 2rem;
+	}
 }
 
 /***********************\
@@ -612,13 +617,13 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-    .chiffre-table th:nth-child(1), 
+    .chiffre-table th:nth-child(1),
     .chiffre-table td:nth-child(1) {
         width: 45%;
         padding-right: 0.3rem;
     }
-    
-    .chiffre-table th:nth-child(2), 
+
+    .chiffre-table th:nth-child(2),
     .chiffre-table td:nth-child(2) {
         width: 55%;
         padding-left: 0.3rem;
