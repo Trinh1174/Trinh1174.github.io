@@ -147,18 +147,11 @@ h2 {
 
 @media screen and (max-width: 768px) {
     .classes-button {
-        width: 92%;
-        font-size: 4rem;
-        height: auto;
-        min-height: 3.5rem;
-        padding: 0.8rem 1rem;
-        white-space: normal;
-        text-align: center;
+        font-size: 5rem;
     }
 
     .classes-button:hover {
-        font-size: 3.9rem;
-        width: 90%;
+        font-size: 4rem;
     }
 
 	.logs-button {
