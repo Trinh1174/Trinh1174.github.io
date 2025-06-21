@@ -655,8 +655,10 @@ a {
 
 /* Border styling for selected color */
 .selected {
-    border: 4px solid #FF1493; /* Pink border for selection */
+    border: 0.3rem solid #FF1493; /* Pink border for selection */
     transform: none; /* Reset transform to avoid conflicts */
+	width: 4.6rem;
+	height: 4.6rem;
 }
 
 /* Color label styling */
@@ -671,10 +673,88 @@ a {
     font-size: 1.8rem;
     text-align: center;
     font-weight: bold;
-    min-height: 1.8rem;
+    min-height: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* Three-state toggle switch */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  gap: 1rem;
+}
+
+.toggle-label {
+  font-size: 1.2rem;
+}
+
+.three-state-toggle {
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-track {
+  width: 9rem;
+  height: 2rem;
+  background-color: #e0e0e0;
+  border-radius: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 0.25rem;
+}
+
+.toggle-track:before {
+  content: "Neutre";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  color: #666;
+  pointer-events: none;
+}
+
+.toggle-slider {
+  width: 2.9rem;
+  height: 1.5rem;
+  background-color: #ff69b4;
+  border-radius: 0.75rem;
+  position: absolute;
+  left: 0.25rem;
+  transition: left 0.3s ease;
+}
+
+.toggle-state-center .toggle-slider {
+  left: 3.25rem;
+}
+
+.toggle-state-right .toggle-slider {
+  left: 6.25rem;
+}
+
+.toggle-area {
+    position: absolute;
+    height: 100%;
+    width: 33.33%;
+    top: 0;
+    cursor: pointer;
+}
+
+.left-area {
+    left: 0;
+}
+
+.center-area {
+    left: 33.33%;
+}
+
+.right-area {
+    left: 66.66%;
 }
 
 /* Responsive Design for Mobile */
@@ -692,6 +772,11 @@ a {
     .color-label {
         font-size: 12px; /* Smaller text on mobile */
     }
+
+	.selected-color {
+    	font-size: 1.3rem;
+		min-height: 1.3rem;
+	}
 }
 
 /************************\
