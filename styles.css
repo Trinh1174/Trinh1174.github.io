@@ -903,6 +903,10 @@ a {
     background-color: #40c4ff;
 }
 
+.french-month {
+    font-size: 0.8em;
+}
+
 .cal-table {
     width: 100%;
     border-collapse: collapse;

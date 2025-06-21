@@ -325,7 +325,7 @@
             "Tháng Chín",
             "Tháng Mười",
             "Tháng Mười Một",
-            "Tháng Mười Deux"
+            "Tháng Mười Hai"
         ];
 
         // 3) Variables globales pour suivre le mois et l’année affichés
@@ -472,20 +472,25 @@
         // 9) Afficher la date du jour en vietnamien
         function showTodayDateText() {
             const t         = new Date(),
-                wdIdx     = t.getDay(),
-                d         = t.getDate(),
-                m         = t.getMonth() + 1,
-                y         = t.getFullYear(),
-                dayWord   = numberToVietnamese(d),
-                monthWord = numberToVietnamese(m),
-                yearWord  = yearToVietnamese(y);
-
+                  wdIdx     = t.getDay(),
+                  d         = t.getDate(),
+                  m         = t.getMonth(), // No need to add 1 when using monthNamesVietnamese array
+                  y         = t.getFullYear(),
+                  dayWord   = numberToVietnamese(d),
+                  monthWord = monthNamesVietnamese[m].substring(6).toLowerCase(), // Use proper month name
+                  yearWord  = yearToVietnamese(y);
+        
             dateDisplay.innerHTML =
             `<strong>${vietnameseWeekdays[wdIdx]}</strong>, ngày ` +
             `<strong>${dayWord}</strong> tháng ` +
             `<strong>${monthWord}</strong> năm ` +
             `<strong>${yearWord}</strong>`;
         }
+
+        const monthNamesFrench = [
+            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+            "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+        ];
 
         // 10) Construire le calendrier
         function buildCalendar(year, month) {
@@ -499,37 +504,38 @@
             let row, dayC = 1, nextD = 1;
 
             for (let i = 0; i < total; i++) {
-            if (i % 7 === 0) {
-                row = document.createElement("tr");
-                calendarBody.appendChild(row);
-            }
-            const cell = document.createElement("td");
-            if (i < firstDay) {
-                cell.textContent = dp - (firstDay - 1 - i);
-                cell.classList.add("blank","prev-month");
-            }
-            else if (dayC <= dim) {
-                cell.textContent = dayC;
-                const t = new Date();
-                if (
-                dayC === t.getDate() &&
-                month === t.getMonth() &&
-                year  === t.getFullYear()
-                ) cell.classList.add("today");
+                if (i % 7 === 0) {
+                    row = document.createElement("tr");
+                    calendarBody.appendChild(row);
+                }
+                const cell = document.createElement("td");
+                if (i < firstDay) {
+                    cell.textContent = dp - (firstDay - 1 - i);
+                    cell.classList.add("blank","prev-month");
+                }
+                else if (dayC <= dim) {
+                    cell.textContent = dayC;
+                    const t = new Date();
+                    if (
+                    dayC === t.getDate() &&
+                    month === t.getMonth() &&
+                    year  === t.getFullYear()
+                    ) cell.classList.add("today");
 
-                (function(d,m,y,el){
-                el.addEventListener("click", ()=>selectDate(d,m,y,el));
-                })(dayC, month, year, cell);
-                dayC++;
+                    (function(d,m,y,el){
+                    el.addEventListener("click", ()=>selectDate(d,m,y,el));
+                    })(dayC, month, year, cell);
+                    dayC++;
+                }
+                else {
+                    cell.textContent = nextD++;
+                    cell.classList.add("blank","next-month");
+                }
+                row.appendChild(cell);
             }
-            else {
-                cell.textContent = nextD++;
-                cell.classList.add("blank","next-month");
-            }
-            row.appendChild(cell);
-            }
-            monthYearElem.textContent =
-            `${monthNamesVietnamese[month]} ${year}`;
+            // Update to display both Vietnamese and English month names
+            monthYearElem.innerHTML =
+            `${monthNamesVietnamese[month]} <span class="french-month">(${monthNamesFrench[month]})</span> ${year}`;
         }
 
         // 11) Quand on clique sur une date du calendrier
@@ -537,18 +543,19 @@
             const prev = document.querySelector(".cal-table .selected");
             if (prev) prev.classList.remove("selected");
             cellElem.classList.add("selected");
-
+        
             const wdi     = new Date(y,m,d).getDay(),
                 dayW    = numberToVietnamese(d),
-                monthW  = numberToVietnamese(m+1),
+                // Use the month name without the "Tháng " prefix
+                monthW  = monthNamesVietnamese[m].substring(6).toLowerCase(),
                 yearW   = yearToVietnamese(y);
-
+        
             dateDisplay.innerHTML =
             `<strong>${vietnameseWeekdays[wdi]}</strong>, ngày ` +
             `<strong>${dayW}</strong> tháng ` +
             `<strong>${monthW}</strong> năm ` +
             `<strong>${yearW}</strong>`;
-
+        
             hideYearSelect();
         }
     </script>
