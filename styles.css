@@ -624,6 +624,69 @@ a {
 }
 
 
+/**************************\
+| ----- couleur.html ----- |
+\**************************/
+
+/* Grid container */
+.color-display {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr); /* Creates 5 equal columns */
+	gap: 3rem; /* Adds space between color boxes */
+	justify-items: center; /* Centers items horizontally */
+	padding: 2rem;
+}
+
+/* Color box styling */
+.color-box {
+	width: 5rem;
+	height: 5rem;
+	margin-bottom: 1rem;
+	cursor: pointer; /* Makes the color boxes clickable */
+	transition: border 0.3s; /* Smooth transition for border change */
+}
+
+/* Color label styling */
+.color-label {
+	text-align: center;
+	font-size: 14px;
+}
+
+/* Title Styling */
+.title-bar h1 {
+	text-align: center;
+	font-size: 3rem;
+	color: #FF1493; /* Pink color for title */
+}
+
+.selected-color {
+	font-size: 1.5rem;
+	text-align: center;
+	margin-top: 1rem;
+}
+
+/* Border styling for selected color */
+.selected {
+	border: 4px solid #FF1493; /* Pink border for selection */
+}
+
+/* Responsive Design for Mobile */
+@media screen and (max-width: 768px) {
+    .color-display {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
+        gap: 2rem; /* Smaller gap */
+    }
+
+    .color-box {
+        width: 4rem; /* Smaller color boxes */
+        height: 4rem;
+    }
+
+    .color-label {
+        font-size: 12px; /* Smaller text on mobile */
+    }
+}
+
 /************************\
 | ----- temps.html ----- |
 \************************/

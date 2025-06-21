@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Học tiếng Việt - Tons</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="title-bar">
+		<h1>Học tiếng Việt</h1>
+		<a href="index.html" class="button-link home-button">🏠</a>
+	</div>
+
+	<div class="selected-color" id="color-name"></div>
+
+	<div class="color-display">
+		<div>
+			<div class="color-box" style="background-color: red;" onclick="showColor('Màu đỏ', this)"></div>
+			<span class="color-label">Rouge</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: orange;" onclick="showColor('Màu cam', this)"></div>
+			<span class="color-label">Orange</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: yellow;" onclick="showColor('Màu vàng', this)"></div>
+			<span class="color-label">Jaune</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: green;" onclick="showColor('Màu xanh lá', this)"></div>
+			<span class="color-label">Vert</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: blue;" onclick="showColor('Màu xanh dương', this)"></div>
+			<span class="color-label">Bleu</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: purple;" onclick="showColor('Màu tím', this)"></div>
+			<span class="color-label">Violet</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: black;" onclick="showColor('Màu đen', this)"></div>
+			<span class="color-label">Noir</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: white;" onclick="showColor('Màu trắng', this)"></div>
+			<span class="color-label">Blanc</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: brown;" onclick="showColor('Màu nâu', this)"></div>
+			<span class="color-label">Marron</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: gray;" onclick="showColor('Màu xám', this)"></div>
+			<span class="color-label">Gris</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: pink;" onclick="showColor('Màu hồng', this)"></div>
+			<span class="color-label">Rose</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: gold;" onclick="showColor('Màu vàng kim', this)"></div>
+			<span class="color-label">Or</span>
+		</div>
+		<div>
+			<div class="color-box" style="background-color: silver;" onclick="showColor('Màu bạc', this)"></div>
+			<span class="color-label">Argent</span>
+		</div>
+	</div>
+
+	<script>
+		function showColor(vietnameseName, element) {
+			// Get the color name element
+			const colorNameElement = document.getElementById("color-name");
+
+			// Check if the element already has the 'selected' class
+			if (element.classList.contains('selected')) {
+				// If it does, we're deselecting it
+				element.classList.remove('selected');
+				// Clear the color name
+				colorNameElement.innerText = "";
+			} else {
+				// If it doesn't, we're selecting it
+				// First, deselect all other colors
+				const allColors = document.querySelectorAll('.color-box');
+				allColors.forEach(colorBox => {
+					colorBox.classList.remove('selected');
+				});
+
+				// Now select this color
+				element.classList.add('selected');
+				// Update the displayed color name
+				colorNameElement.innerText = vietnameseName;
+			}
+		}
+    </script>
+</body>
+</html>
