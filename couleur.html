@@ -12,7 +12,21 @@
 		<a href="index.html" class="button-link home-button">🏠</a>
 	</div>
 
-	<div class="selected-color" id="color-name"></div>
+	<div class="color-header">
+		<div class="selected-color" id="color-name"></div>
+		<div class="toggle-container">
+			<div class="toggle-label">Clair</div>
+			<div class="three-state-toggle">
+				<div class="toggle-track">
+					<div class="toggle-area left-area"></div>
+					<div class="toggle-area center-area"></div>
+					<div class="toggle-area right-area"></div>
+					<div class="toggle-slider"></div>
+				</div>
+			</div>
+			<div class="toggle-label">Sombre</div>
+		</div>
+	</div>
 
 	<div class="color-display">
 		<div>
@@ -67,80 +81,77 @@
 			<div class="color-box" style="background-color: silver;" onclick="showColor('Màu bạc', this)"></div>
 			<span class="color-label">Argent</span>
 		</div>
-		<div class="toggle-container">
-			<div class="toggle-label">Clair</div>
-			<div class="three-state-toggle">
-				<div class="toggle-track">
-					<div class="toggle-area left-area"></div>
-					<div class="toggle-area center-area"></div>
-					<div class="toggle-area right-area"></div>
-					<div class="toggle-slider"></div>
-				</div>
-			</div>
-			<div class="toggle-label">Sombre</div>
-		</div>
 	</div>
 
 
 	<script>
-		function showColor(vietnameseName, element) {
-			// Get the color name element
-			const colorNameElement = document.getElementById("color-name");
-
-			// Check if the element already has the 'selected' class
-			if (element.classList.contains('selected')) {
-				// If it does, we're deselecting it
-				element.classList.remove('selected');
-				// Clear the color name
-				colorNameElement.innerText = "";
-			} else {
-				// If it doesn't, we're selecting it
-				// First, deselect all other colors
-				const allColors = document.querySelectorAll('.color-box');
-				allColors.forEach(colorBox => {
-					colorBox.classList.remove('selected');
-				});
-
-				// Now select this color
-				element.classList.add('selected');
-				// Update the displayed color name
-				colorNameElement.innerText = vietnameseName;
-			}
+		// keep track of the raw Vietnamese name and current toggle state
+		let baseName = "";
+		let currentState = "center";
+	  
+		// helper to (re)draw the full label
+		function updateName() {
+		  const el = document.getElementById("color-name");
+		  if (!baseName) {
+			el.innerText = "";
+			return;
+		  }
+		  let suffix = "";
+		  if (currentState === "left")  suffix = " nhạt";
+		  if (currentState === "right") suffix = " đậm";
+		  el.innerText = baseName + suffix;
 		}
-
-		document.addEventListener('DOMContentLoaded', function() {
-			const toggle = document.querySelector('.three-state-toggle');
-			const leftArea = document.querySelector('.left-area');
-			const centerArea = document.querySelector('.center-area');
-			const rightArea = document.querySelector('.right-area');
-
-			// Set initial state to center
-			let currentState = 'center';
-
-			// Apply center position by default
-			toggle.classList.add('toggle-state-center');
-
-			leftArea.addEventListener('click', function(e) {
-				e.stopPropagation(); // Prevent event bubbling
-				toggle.classList.remove('toggle-state-center');
-				toggle.classList.remove('toggle-state-right');
-				currentState = 'left';
-			});
-
-			centerArea.addEventListener('click', function(e) {
-				e.stopPropagation(); // Prevent event bubbling
-				toggle.classList.add('toggle-state-center');
-				toggle.classList.remove('toggle-state-right');
-				currentState = 'center';
-			});
-
-			rightArea.addEventListener('click', function(e) {
-				e.stopPropagation(); // Prevent event bubbling
-				toggle.classList.remove('toggle-state-center');
-				toggle.classList.add('toggle-state-right');
-				currentState = 'right';
-			});
+	  
+		function showColor(vietnameseName, element) {
+		  const colorNameElement = document.getElementById("color-name");
+	  
+		  if (element.classList.contains("selected")) {
+			// deselect
+			element.classList.remove("selected");
+			baseName = "";
+			colorNameElement.innerText = "";
+		  } else {
+			// select new
+			document.querySelectorAll(".color-box")
+					.forEach(c => c.classList.remove("selected"));
+			element.classList.add("selected");
+			baseName = vietnameseName;
+			updateName();
+		  }
+		}
+	  
+		document.addEventListener("DOMContentLoaded", function() {
+		  const toggle = document.querySelector(".three-state-toggle");
+		  const leftArea   = document.querySelector(".left-area");
+		  const centerArea = document.querySelector(".center-area");
+		  const rightArea  = document.querySelector(".right-area");
+	  
+		  // start in center
+		  toggle.classList.add("toggle-state-center");
+	  
+		  leftArea.addEventListener("click", function(e) {
+			e.stopPropagation();
+			toggle.classList.remove("toggle-state-center","toggle-state-right");
+			currentState = "left";
+			updateName();
+		  });
+	  
+		  centerArea.addEventListener("click", function(e) {
+			e.stopPropagation();
+			toggle.classList.add("toggle-state-center");
+			toggle.classList.remove("toggle-state-right");
+			currentState = "center";
+			updateName();
+		  });
+	  
+		  rightArea.addEventListener("click", function(e) {
+			e.stopPropagation();
+			toggle.classList.remove("toggle-state-center");
+			toggle.classList.add("toggle-state-right");
+			currentState = "right";
+			updateName();
+		  });
 		});
-    </script>
+	  </script>	  
 </body>
 </html>

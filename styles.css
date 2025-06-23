@@ -628,6 +628,13 @@ a {
 | ----- couleur.html ----- |
 \**************************/
 
+.color-header {
+    position: relative;
+    width: 100%;
+    padding: 2rem;           /* match your spacing */
+    box-sizing: border-box;
+}
+
 /* Grid container */
 .color-display {
 	display: grid;
@@ -670,22 +677,27 @@ a {
 }
 
 .selected-color {
+    display: block;
+    width: 100%;
+    text-align: center;      /* centers “Màu cam” */
     font-size: 1.8rem;
-    text-align: center;
     font-weight: bold;
     min-height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    line-height: 1;
 }
 
 /* Three-state toggle switch */
 .toggle-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem auto;
-  gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    gap: 1rem;
+    position: absolute;
+    right: 2rem;             /* adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;               /* kill any auto margins */
 }
 
 .toggle-label {
@@ -912,6 +924,7 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     height: 22vw; /* Match the clock's height */
     min-height: 22vw;
 }
