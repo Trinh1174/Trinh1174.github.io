@@ -785,6 +785,54 @@ a {
 
 /* Responsive Design for Mobile */
 @media screen and (max-width: 768px) {
+    .color-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;        /* center both text and toggle */
+        padding-bottom: 1rem;       /* add a bit of breathing room */
+    }
+
+    .toggle-container {
+        position: static;           /* let it flow in the flex column */
+        transform: none;            /* cancel the translateY */
+        margin-top: 1rem;
+        margin-left: 1.2rem;
+        right: auto; top: auto;
+    }
+
+    .toggle-label {
+        font-size: 0.9rem;
+    }
+
+    .toggle-track:before {
+        font-size: 0.7rem;
+    }
+    
+    .toggle-track {
+        width: 6rem;      /* down from 9rem */
+        height: 1.5rem;   /* down from 2rem */
+    }
+
+    .toggle-slider {
+        /* home it at the left padding of the track */
+        position: absolute;
+        left: 0.25rem;
+        width: 2rem;
+        height: 1.2rem;
+        border-radius: 0.6rem;
+        transition: left 0.3s ease;
+        transform: translateX(0);
+    }
+
+    .toggle-state-center .toggle-slider {
+        left: 2.25rem;
+    }
+    
+    /* 2/3 of a 6rem track = 4rem; 0.25 + 4 = 4.25 */
+    .toggle-state-right .toggle-slider {
+        left: 4.25rem;
+    }
+
     .color-display {
         grid-template-columns: repeat(3, 1fr); /* 3 columns for tablets */
         gap: 2rem; /* Smaller gap */
