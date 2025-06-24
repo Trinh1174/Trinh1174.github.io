@@ -783,6 +783,17 @@ a {
     left: 66.66%;
 }
 
+/* lightens each box by ~50% */
+.color-display.light-mode .color-box {
+    filter: brightness(1.2) !important;
+}
+
+/* darkens each box by ~50% */
+.color-display.dark-mode .color-box {
+    filter: brightness(0.8) !important;
+}
+
+
 /* Responsive Design for Mobile */
 @media screen and (max-width: 768px) {
     .color-header {
