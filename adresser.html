@@ -3,44 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <title>Học tiếng Việt</title>
-  <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
+  <script src="familytree.js"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<div class="title-bar">
-		<h1>Học tiếng Việt</h1>
-		<a href="index.html" class="button-link home-button">🏠</a>
-	</div>
+  <div class="title-bar">
+    <h1>Học tiếng Việt</h1>
+    <a href="index.html" class="button-link home-button">🏠</a>
+  </div>
 
-    <div id="tree"></div>
-      
-    <script>
-        document.getElementById("tree").style.height = "80vh";
-        var chart = new OrgChart(document.getElementById("tree"), {
-        nodeBinding: {
-            field_0: "name",
-            field_1: "relation"
-        },
-        nodes: [
-            { id: 1, name: "👴 Cụ", relation: "Arrière-grand-père" },
-            { id: 2, name: "👵 Bà", relation: "Arrière-grand-mère", pid: 1 },
+  <div id="tree"></div>
 
-            { id: 3, name: "👴 Ông", relation: "Grand-père", pid: 1 },
-            { id: 4, name: "👵 Bà", relation: "Grand-mère", pid: 1 },
+  <script>
+    document.getElementById("tree").style.height = "70vh";
+  
+    const family = new FamilyTree(document.getElementById("tree"), {
+      enableSearch: false,
+      nodeBinding: {
+        field_0: "name",
+        field_1: "relation"
+      },
+      nodes: [
+        { id: 1, pids: [2], name: "👴 Cụ", relation: "Arrière-grand-père", gender: "male" },
+        { id: 2, pids: [1], name: "👵 Bà", relation: "Arrière-grand-mère", gender: "female" },
+  
+        { id: 3, pids: [4], fid: 1, mid: 2, name: "👵 Bà", relation: "Grand-mère", gender: "female" },
+        { id: 4, pids: [3], name: "👴 Ông", relation: "Grand-père", gender: "male" },
+  
+        { id: 5, pids: [6], name: "👵 Bà", relation: "Grand-mère", gender: "female" },
+        { id: 6, pids: [5], name: "👴 Ông", relation: "Grand-père", gender: "male" },
+  
+        { id: 7, pids: [8], fid: 4, mid: 3, name: "👩 Má", relation: "Mère", gender: "female" },
+        { id: 8, pids: [7], fid: 6, mid: 5, name: "👨 Ba", relation: "Père", gender: "male" },
+  
+        { id: 9, fid: 8, mid: 7, name: "👦 Anh", relation: "Frère", gender: "male" },
+        { id: 10, fid: 8, mid: 7, name: "🧒 Moi", relation: "Moi" },
+        { id: 11, fid: 8, mid: 7, name: "👧 Chi", relation: "Sœur", gender: "female" }
+      ],
+    });
+  </script>
+  
 
-            { id: 5, name: "👨‍🦰 Bố", relation: "Père", pid: 3 },
-            { id: 6, name: "👩‍🦰 Mẹ", relation: "Mère", pid: 3 },
-
-            { id: 7, name: "🧑 Moi", relation: "(Anh / Em / Bạn)", pid: 5 },
-
-            { id: 8, name: "👶 Con", relation: "Enfant", pid: 7 },
-            { id: 9, name: "👶 Cháu", relation: "Petit-enfant", pid: 7 },
-
-            { id: 10, name: "👨‍🦱 Chú", relation: "Oncle", pid: 3 },
-            { id: 11, name: "👩‍🦱 Cô", relation: "Tante", pid: 3 }
-        ]
-        });
-    </script>
-      
 </body>
 </html>

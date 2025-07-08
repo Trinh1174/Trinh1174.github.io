@@ -1295,4 +1295,7 @@ a {
 #tree {
     width: 100%;
     margin: 2rem auto;
+    background-color: #fff0f5;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
