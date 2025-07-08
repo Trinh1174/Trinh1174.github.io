@@ -1218,3 +1218,71 @@ a {
         font-size: 1rem;
     }
 }
+
+
+/****************************\
+| ----- questions.html ----- |
+\****************************/
+
+.explainations {
+    color: #e91e63;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 auto 1rem auto;
+    line-height: 1.6;
+    background-color: #fce4ec;
+    width: 60vw;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.explaination-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .explainations {
+        font-size: 1.1rem;
+        width: 90vw;
+    }
+
+    .explaination-title {
+        font-size: 1.5rem;
+    }
+}
+
+.question-table th:nth-child(1),
+.question-table td:nth-child(1) {
+    width: 30%;
+}
+
+.question-table th:nth-child(2),
+.question-table td:nth-child(2) {
+    width: 40%;
+}
+
+.question-table th:nth-child(3),
+.question-table td:nth-child(3) {
+    width: 30%;
+}
+
+.question-ouverte-table th:nth-child(1),
+.question-ouverte-table td:nth-child(1) {
+    width: 25%;
+}
+
+.question-ouverte-table th:nth-child(2),
+.question-ouverte-table td:nth-child(2) {
+    width: 25%;
+}
+
+.question-ouverte-table th:nth-child(3),
+.question-ouverte-table td:nth-child(3) {
+    width: 25%;
+}
+
+.question-ouverte-table th:nth-child(4),
+.question-ouverte-table td:nth-child(4) {
+    width: 25%;
+}
