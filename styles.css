@@ -1286,3 +1286,13 @@ a {
 .question-ouverte-table td:nth-child(4) {
     width: 25%;
 }
+
+
+/***************************\
+| ----- adresser.html ----- |
+\***************************/
+
+#tree {
+    width: 100%;
+    margin: 2rem auto;
+}
