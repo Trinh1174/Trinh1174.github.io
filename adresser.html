@@ -24,6 +24,14 @@
         field_1: "relation", // Relation goes into field_1
         description: "description"
       },
+      toolbar: {
+         layout: true,
+         zoom: true,
+         fit: true,
+         expandAll: false,
+         fullScreen: true
+     },
+     template: "hugo"
     });
 
     family.on('click', function (sender, args) {
@@ -33,51 +41,125 @@
     family.load([
       // Couche 1
       // Arrière-grand-parents maternel
-      { id: 1, pids: [2], name: "👴 Cụ (ngoại)", relation: "Arrière-grand-père", gender: "male", description: "truc" },
-      { id: 2, pids: [1], name: "👵 Bà (ngoại)", relation: "Arrière-grand-mère", gender: "female" },
+      { id: 1, pids: [2], name: "👴 Cụ ngoại", relation: "Arrière-grand-père", gender: "male", description: "truc" },
+      { id: 2, pids: [1], name: "👵 Bà ngoại", relation: "Arrière-grand-mère", gender: "female" },
 
       // Arrière-grand-parents paternel
-      { id: 3, pids: [4], name: "👴 Cụ (nội)", relation: "Arrière-grand-père", gender: "male" },
-      { id: 4, pids: [3], name: "👵 Bà (nội)", relation: "Arrière-grand-mère", gender: "female" },
+      { id: 3, pids: [4], name: "👴 Cụ nội", relation: "Arrière-grand-père", gender: "male" },
+      { id: 4, pids: [3], name: "👵 Bà nội", relation: "Arrière-grand-mère", gender: "female" },
 
       // Couche 2
       // Grand-parents maternel
-      { id: 5, pids: [6], mid: 2, fid: 1, name: "👵 Bà (ngoại)", relation: "Grand-mère", gender: "female" },
-      { id: 6, pids: [5], name: "👴 Ông (ngoại)", relation: "Grand-père", gender: "male" },
+      { id: 5, pids: [6], mid: 2, fid: 1, name: "👵 Bà ngoại", relation: "Grand-mère", gender: "female" },
+      { id: 6, pids: [5], name: "👴 Ông ngoại", relation: "Grand-père", gender: "male" },
       
       // Grand-parents paternel
-      { id: 7, pids: [8], name: "👵 Bà (nội)", relation: "Grand-mère", gender: "female" },
-      { id: 8, pids: [7], mid: 4, fid: 3, name: "👴 Ông (nội)", relation: "Grand-père", gender: "male" },
+      { id: 7, pids: [8], name: "👵 Bà nội", relation: "Grand-mère", gender: "female" },
+      { id: 8, pids: [7], mid: 4, fid: 3, name: "👴 Ông nội", relation: "Grand-père", gender: "male" },
 
       // Couche 3
-      // Soeur maternel
-      { id: 9, pids: [10], mid: 5, fid: 6, name: "👩 Dì", relation: "Tante", gender: "female" },
+      // Soeur maternel plus jeune
+      { id: 9, pids: [10], mid: 5, fid: 6, name: "👩 Dì", relation: "Tante (âge < Mère)", gender: "female" },
       { id: 10, pids: [9], name: "👨 Dượng", relation: "Mari de la tante", gender: "male" },
-      
-      // Fraterie paternel plus jeune
-      { id: 11, pids: [12], mid: 7, fid: 8, name: "👨 Chú", relation: "Oncle (âge < Père)", gender: "male" },
-      { id: 12, pids: [11], name: "👩 Thím", relation: "Femme de l'oncle", gender: "female" },
+
+      // Frère maternel plus jeune
+      { id: 11, pids: [12], mid: 5, fid: 6, name: "👨 Cậu", relation: "Oncle (âge < Mère)", gender: "male" },
+      { id: 12, pids: [11], name: "👩 Mợ", relation: "Femme de l'oncle", gender: "female" },
+
+      // Soeur paternel plus jeune
+      { id: 13, pids: [14], mid: 7, fid: 8, name: "👩 Cô", relation: "Tante (âge < Père)", gender: "female" },
+      { id: 14, pids: [13], name: "👨 Dượng", relation: "Mari de la tante", gender: "male" },
+  
+      // Frère paternel plus jeune
+      { id: 15, pids: [16], mid: 7, fid: 8, name: "👨 Chú", relation: "Oncle (âge < Père)", gender: "male" },
+      { id: 16, pids: [15], name: "👩 Thím", relation: "Femme de l'oncle", gender: "female" },
 
       // Parents
-      { id: 13, pids: [14], mid: 5, fid: 6, name: "👩 Mère", relation: "Má", gender: "female" },
-      { id: 14, pids: [13], mid: 7, fid: 8, name: "👨 Ba", relation: "Ba", gender: "male" },
+      { id: 17, pids: [18], mid: 5, fid: 6, name: "👩 Má/Mẹ", relation: "Mère", gender: "female" },
+      { id: 18, pids: [17], mid: 7, fid: 8, name: "👨 Ba", relation: "Père", gender: "male" },
 
-      // Frere maternel
-      { id: 15, pids: [16], mid: 5, fid: 6, name: "👨 Cậu", relation: "Oncle", gender: "male" },
-      { id: 16, pids: [15], name: "👩 Mợ", relation: "Femme de l'oncle", gender: "female" },
+      // Soeur maternel plus âgée
+      { id: 19, pids: [20], mid: 5, fid: 6, name: "👩 Dì", relation: "Tante (âge > Mère)", gender: "female" },
+      { id: 20, pids: [19], name: "👨 Dượng", relation: "Mari de la tante", gender: "male" },
 
-      // Fraterie paternel plus âgée
-      { id: 17, pids: [18], mid: 7, fid: 8, name: "👩 Cô", relation: "Tante", gender: "female" },
-      { id: 18, pids: [17], name: "👨 Dượng", relation: "Mari de la tante", gender: "male" },
-      { id: 19, pids: [20], mid: 7, fid: 8, name: "👨 Bác", relation: "Oncle (âge > Père)", gender: "male" },
-      { id: 20, pids: [19], name: "👩 Bác", relation: "Femme de l'oncle", gender: "female" },
+      // Frere maternel plus âgé
+      { id: 21, pids: [22], mid: 5, fid: 6, name: "👨 Cậu", relation: "Oncle (âge > Mère)", gender: "male" },
+      { id: 22, pids: [21], name: "👩 Mợ", relation: "Femme de l'oncle", gender: "female" },
+
+      // Soeur paternel plus âgée
+      { id: 23, pids: [24], mid: 7, fid: 8, name: "👩 Cô", relation: "Tante (âge > Père)", gender: "female" },
+      { id: 24, pids: [23], name: "👨 Dượng", relation: "Mari de la tante", gender: "male" },
+
+      // Frère paternel plus âgé
+      { id: 25, pids: [26], mid: 7, fid: 8, name: "👨 Bác", relation: "Oncle (âge > Père)", gender: "male" },
+      { id: 26, pids: [25], name: "👩 Bác", relation: "Femme de l'oncle", gender: "female" },
 
       // Couche 4
-      { id: 21, mid: 13, fid: 14, name: "👧 Petite sœur", relation: "Em", gender: "female" },
-      { id: 22, mid: 13, fid: 14, name: "👦 Petit frère", relation: "Em", gender: "male" },
-      { id: 23, mid: 13, fid: 14, name: "🧒 Moi", relation: "Con/Em/Anh/Chị" },
-      { id: 24, mid: 13, fid: 14, name: "👧 Grande Sœur", relation: "Chị", gender: "female" },
-      { id: 25, mid: 13, fid: 14, name: "👦 Grand frère", relation: "Anh", gender: "male" }
+      // Nucléaire
+      { id: 27, mid: 17, fid: 18, name: "👧 Em (gái)", relation: "Petite sœur", gender: "female" },
+      { id: 28, mid: 17, fid: 18, name: "👦 Em (trai)", relation: "Petit frère", gender: "male" },
+      { id: 29, pids: [48], mid: 17, fid: 18, name: "🧒 Con/Em/Anh/Chị", relation: "Moi: Con = âge < parents, Em = âge même génération, Anh/Chị = âge > notre génération" },
+      { id: 30, mid: 17, fid: 18, name: "👧 Chị", relation: "Grande Sœur", gender: "female" },
+      { id: 31, mid: 17, fid: 18, name: "👦 Anh", relation: "Grand frère", gender: "male" },
+
+      // Tante (âge < Mère)
+      { id: 32, mid: 9, fid: 10, name: "👧 Em (gái) họ", relation: "Cousine", gender: "female" },
+      { id: 33, mid: 9, fid: 10, name: "👦 Em (trai) họ", relation: "Cousin", gender: "male" },
+      // Oncle (âge < Mère)
+      { id: 34, mid: 11, fid: 12, name: "👧 Em (gái) họ", relation: "Cousine", gender: "female" },
+      { id: 35, mid: 11, fid: 12, name: "👦 Em (trai) họ", relation: "Cousin", gender: "male" },
+
+      // Tante (âge > Mère)
+      { id: 36, mid: 19, fid: 20, name: "👧 Chị họ", relation: "Cousine", gender: "female" },
+      { id: 37, mid: 19, fid: 20, name: "👦 Anh họ", relation: "Cousin", gender: "male" },
+      // Oncle (âge > Mère)
+      { id: 38, mid: 21, fid: 22, name: "👧 Chị họ", relation: "Cousine", gender: "female" },
+      { id: 39, mid: 21, fid: 22, name: "👦 Anh họ", relation: "Cousin", gender: "male" },
+
+      // Cousins paternels
+      // Tante (âge < Père)
+      { id: 40, mid: 13, fid: 14, name: "👧 Em (gái) họ", relation: "Cousine", gender: "female" },
+      { id: 41, mid: 13, fid: 14, name: "👦 Em (trai) họ", relation: "Cousin", gender: "male" },
+      // Oncle (âge < Père)
+      { id: 42, mid: 15, fid: 16, name: "👧 Em (gái) họ", relation: "Cousine", gender: "female" },
+      { id: 43, mid: 15, fid: 16, name: "👦 Em (trai) họ", relation: "Cousin", gender: "male" },
+
+      // Tante (âge > Père)
+      { id: 44, mid: 23, fid: 24, name: "👧 Chị họ", relation: "Cousine", gender: "female" },
+      { id: 45, mid: 23, fid: 24, name: "👦 Anh họ", relation: "Cousin", gender: "male" },
+      // Oncle (âge > Père)
+      { id: 46, mid: 25, fid: 26, name: "👧 Chị họ", relation: "Cousine", gender: "female" },
+      { id: 47, mid: 25, fid: 26, name: "👦 Anh họ", relation: "Cousin", gender: "male" },
+      
+      // Mon nucléaire
+      // Mari/Femme
+      { id: 48, pids: [29], mid: 50, fid: 49, name: "👧 Chồng/Vợ", relation: "Mari/Femme" },
+      // Ses parents
+      { id: 49, pids: [50], name: "👨 Bố chồng/Bố vợ", relation: "Beau-père du mari/Beau-père de la femme", gender: "male" },
+      { id: 50, pids: [49], name: "👩 Mẹ chồng/Mẹ vợ", relation: "Belle-mère du mari/Belle-mère de la femme", gender: "female" },
+      // Nos enfants
+      { id: 51, pids: [59], mid: 48, fid: 29, name: "👧 Con gái", relation: "Fille", gender: "female" },
+      { id: 52, pids: [60], mid: 48, fid: 29, name: "👦 Con trai", relation: "Fils", gender: "male" },
+
+      // Enfants fraterie
+      { id: 53, mid: 27, name: "👦 Cháu trai", relation: "Neveu", gender: "male" },
+      { id: 54, fid: 31, name: "👧 Cháu gái", relation: "Nièce", gender: "female" },
+
+      // Beau frère/Belle soeur
+      { id: 55, mid: 50, fid: 49, name: "🧒 Em (trai) chồng/Em (trai) vợ", relation: "Beau-frère (âge < Mari/Femme)", gender: "male" },
+      { id: 56, mid: 50, fid: 49, name: "👧 Em (gái) chồng/Em (gái) vợ", relation: "Belle-Sœur (âge < Mari/Femme)", gender: "female" },
+      { id: 57, mid: 50, fid: 49, name: "🧒 Anh chồng/Anh vợ", relation: "Beau-frère (âge > Mari/Femme)", gender: "male" },
+      { id: 58, mid: 50, fid: 49, name: "👧 Chị chồng/Chị vợ", relation: "Belle-Sœur (âge > Mari/Femme)", gender: "female" },
+
+      // Mari/Femme enfants
+      { id: 59, pids: [51], name: "👦 Con rể", relation: "Gendre/Beau-fils", gender: "male" },
+      { id: 60, pids: [52], name: "👧 Con dâu", relation: "Bru/Belle-fille", gender: "female" },
+
+      // Petits enfants
+      { id: 61, mid: 51, fid: 59, name: "👶 Cháu (trai) ngoại", relation: "Petit-fils maternel", gender: "male" },
+      { id: 62, mid: 51, fid: 59, name: "👶 Cháu (gái) ngoại", relation: "Petite-fille maternel", gender: "female" },
+      { id: 63, mid: 60, fid: 52, name: "👶 Cháu (trai) nội", relation: "Petit-fils paternel", gender: "male" },
+      { id: 64, mid: 60, fid: 52, name: "👶 Cháu (gái) nội", relation: "Petite-fille paternel", gender: "female" },
     ]);
   </script>
 
