@@ -1219,6 +1219,17 @@ a {
     }
 }
 
+/* ----- Temps Grammatical ----- */
+
+.temps-grammatical th:nth-child(1),
+.temps-grammatical td:nth-child(1) {
+    width: 50%;
+}
+
+.temps-grammatical th:nth-child(2),
+.temps-grammatical td:nth-child(2) {
+    width: 50%;
+}
 
 /****************************\
 | ----- questions.html ----- |

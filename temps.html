@@ -15,7 +15,8 @@
 	<div class="switch-bar">
         <button id="btn-heure" class="switch-btn active">Heure</button>
         <button id="btn-dates" class="switch-btn">Date</button>
-        <button id="btn-autres" class="switch-btn">Autre</button>
+        <button id="btn-temps-gram" class="switch-btn">Temps Grammatical</button>
+        <button id="btn-moment-jour" class="switch-btn">Moment de la journée</button>
     </div>
 
     <div class="clock-container">
@@ -68,7 +69,52 @@
         </div>
     </div>
 
-    <div class="autres-container" style="display:none;">
+    <div class="temps-gram" style="display:none;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Passé</th>
+                    <th>Présent</th>
+                    <th>Futur</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Đã</b></td>
+                    <td><b>Đang</b></td>
+                    <td><b>Sẽ</b></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="temps-grammatical">
+            <thead>
+                <tr>
+                    <th>Vietnamien</th>
+                    <th>Traduction</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Con đã ăn cơm rồi.</td>
+                    <td>J'ai déjà mangé.</td>
+                </tr>
+                <tr>
+                    <td>Con đang ăn sáng.</td>
+                    <td>Je suis en train de manger le petit déjeuner.</td>
+                </tr>
+                <tr>
+                    <td>Con ăn trưa.</td>
+                    <td>Je mange le déjeuner.</td>
+                </tr>
+                <tr>
+                    <td>Con sẽ ăn tối.</td>
+                    <td>Je vais manger le dîner.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="moment-jour" style="display:none;">
         <div class="text-block">
             <p>🚧 En cours de développement 🚧</p>
         </div>
@@ -79,18 +125,23 @@
 		function showSection(section) {
             document.querySelector('.clock-container').style.display = section === 'heure' ? '' : 'none';
             document.querySelector('.date-container').style.display = section === 'dates' ? '' : 'none';
-            document.querySelector('.autres-container').style.display = section === 'autres' ? '' : 'none';
+            document.querySelector('.temps-gram').style.display = section === 'temps-gram' ? '' : 'none';
+            document.querySelector('.moment-jour').style.display = section === 'moment-jour' ? '' : 'none';
 
             document.getElementById('btn-heure').classList.toggle('active', section === 'heure');
             document.getElementById('btn-dates').classList.toggle('active', section === 'dates');
-            document.getElementById('btn-autres').classList.toggle('active', section === 'autres');
+            document.getElementById('btn-temps-gram').classList.toggle('active', section === 'temps-gram');
+            document.getElementById('btn-moment-jour').classList.toggle('active', section === 'moment-jour');
         }
 
         document.getElementById('btn-heure').onclick = () => showSection('heure');
         document.getElementById('btn-dates').onclick = () => showSection('dates');
-        document.getElementById('btn-autres').onclick = () => showSection('autres');
-
-        // HEURE
+        document.getElementById('btn-temps-gram').onclick = () => showSection('temps-gram');
+        document.getElementById('btn-moment-jour').onclick = () => showSection('moment-jour');
+    </script>
+    
+    <!-- HEURE -->
+    <script>
         let customTime = null;
         let isEditingTime = false;
 
@@ -300,6 +351,7 @@
 
     </script>
 
+    <!-- DATE -->
     <script>
         // 1) Jours de la semaine en vietnamien (0 = dimanche … 6 = samedi)
         const vietnameseWeekdays = [
@@ -559,8 +611,6 @@
             hideYearSelect();
         }
     </script>
-
-
 
 </body>
 </html>
