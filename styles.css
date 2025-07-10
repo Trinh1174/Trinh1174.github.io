@@ -1326,3 +1326,30 @@ a {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     user-select: none;
 }
+
+/***************************\
+| ----- postions.html ----- |
+\***************************/
+
+.position-container {
+    width: 90vw;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* For smaller screens (approximately 14" and below) */
+@media screen and (max-width: 1600px) {
+    .position-container {
+        height: 70vh;
+    }
+}
+
+.sphere {
+    width: 100px;
+    height: 100px;
+    background-color: #6495ed;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 100%;
+}

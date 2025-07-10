@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Học tiếng Việt</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="title-bar">
+		<h1>Học tiếng Việt</h1>
+		<a href="index.html" class="button-link home-button">🏠</a>
+	</div>
+
+	<div class="position-container">
+    <div class="sphere"></div>
+  </div>
+
+  <script>
+    const sphere = document.querySelector('.sphere');
+    const container = document.querySelector('.position-container');
+
+    let isDragging = false;
+    let offsetX, offsetY, velocityX = 0, velocityY = 0;
+    let friction = 0.95; // Friction for the "sliding" effect
+
+    // Function to start the drag
+    sphere.addEventListener('mousedown', (e) => {
+      isDragging = true;
+
+      // Calculate offsets relative to the sphere's position
+      const sphereRect = sphere.getBoundingClientRect();
+      offsetX = e.clientX - sphereRect.left;
+      offsetY = e.clientY - sphereRect.top;
+
+      // Reset velocity when starting to drag
+      velocityX = 0;
+      velocityY = 0;
+
+      // Prevent text selection during drag
+      e.preventDefault();
+    });
+
+    // Function to move the sphere during mousemove
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        // Calculate the new position of the sphere
+        let posX = e.clientX - offsetX;
+        let posY = e.clientY - offsetY;
+
+        // Prevent the sphere from going out of bounds of the container
+        const containerRect = container.getBoundingClientRect();
+        const sphereRect = sphere.getBoundingClientRect();
+
+        // Limit positions to ensure the sphere stays inside the container
+        posX = Math.max(containerRect.left, Math.min(posX, containerRect.right - sphereRect.width));
+        posY = Math.max(containerRect.top, Math.min(posY, containerRect.bottom - sphereRect.height));
+
+        // Apply the new position to the sphere
+        sphere.style.left = `${posX - containerRect.left}px`;
+        sphere.style.top = `${posY - containerRect.top}px`;
+      }
+    });
+
+    // When the drag ends
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Simulate physics (inertia and friction)
+    function animatePhysics() {
+      if (!isDragging) {
+        // Apply friction to simulate inertia
+        velocityX *= friction;
+        velocityY *= friction;
+
+        // Apply velocity to the sphere's movement
+        let currentX = sphere.offsetLeft;
+        let currentY = sphere.offsetTop;
+
+        // Prevent the sphere from going out of bounds of the container
+        const containerRect = container.getBoundingClientRect();
+        const sphereRect = sphere.getBoundingClientRect();
+
+        // Limit positions to keep the sphere inside the container
+        currentX = Math.max(containerRect.left, Math.min(currentX + velocityX, containerRect.right - sphereRect.width));
+        currentY = Math.max(containerRect.top, Math.min(currentY + velocityY, containerRect.bottom - sphereRect.height));
+
+        sphere.style.left = `${currentX - containerRect.left}px`;
+        sphere.style.top = `${currentY - containerRect.top}px`;
+
+        // Stop the animation if velocity is too small
+        if (Math.abs(velocityX) < 0.1 && Math.abs(velocityY) < 0.1) {
+          return;
+        }
+      }
+
+      // Continue the animation in the next frame
+      requestAnimationFrame(animatePhysics);
+    }
+
+    // Function to apply velocity to the sphere when moved
+    function applyVelocity(dx, dy) {
+      velocityX += dx;
+      velocityY += dy;
+    }
+
+    // Start the physics animation
+    animatePhysics();
+  </script>
+</body>
+</html>
+
