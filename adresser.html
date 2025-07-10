@@ -15,7 +15,15 @@
   <div id="tree"></div>
 
   <script>
-    document.getElementById("tree").style.height = "70vh";
+    // Set tree height based on screen size
+    const screenWidth = window.screen.width;
+    if (screenWidth < 1500) {
+      // Likely a 14" or smaller screen
+      document.getElementById("tree").style.height = "70vh";
+    } else {
+      // Likely a 15.6" or larger screen
+      document.getElementById("tree").style.height = "80vh";
+    }
 
     const family = new FamilyTree(document.getElementById("tree"), {
       enableSearch: false,
@@ -31,6 +39,7 @@
          expandAll: false,
          fullScreen: true
      },
+     keyNavigation: { focusId: 29 },
      template: "hugo"
     });
 
