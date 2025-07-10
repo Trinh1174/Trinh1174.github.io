@@ -1221,6 +1221,21 @@ a {
 
 /* ----- Temps Grammatical ----- */
 
+.temps-grammatical-title th:nth-child(1),
+.temps-grammatical-title td:nth-child(1) {
+    width: 33%;
+}
+
+.temps-grammatical-title th:nth-child(2),
+.temps-grammatical-title td:nth-child(2) {
+    width: 34%;
+}
+
+.temps-grammatical-title th:nth-child(3),
+.temps-grammatical-title td:nth-child(3) {
+    width: 33%;
+}
+
 .temps-grammatical th:nth-child(1),
 .temps-grammatical td:nth-child(1) {
     width: 50%;
