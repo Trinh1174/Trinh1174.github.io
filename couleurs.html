@@ -92,7 +92,7 @@
 		// keep track of the raw Vietnamese name and current toggle state
 		let baseName = "";
 		let currentState = "center";
-	  
+
 		// helper to (re)draw the full label
 		function updateName() {
 		  const el = document.getElementById("color-name");
@@ -101,14 +101,14 @@
 			return;
 		  }
 		  let suffix = "";
-		  if (currentState === "left")  suffix = " nhạt";
+		  if (currentState === "left")  suffix = " lợt";
 		  if (currentState === "right") suffix = " đậm";
 		  el.innerText = baseName + suffix;
 		}
-	  
+
 		function showColor(vietnameseName, element) {
 		  const colorNameElement = document.getElementById("color-name");
-	  
+
 		  if (element.classList.contains("selected")) {
 			// deselect
 			element.classList.remove("selected");
@@ -123,7 +123,7 @@
 			updateName();
 		  }
 		}
-	  
+
 		document.addEventListener("DOMContentLoaded", function() {
 			const toggle       = document.querySelector(".three-state-toggle");
 			const leftArea     = document.querySelector(".left-area");
@@ -165,6 +165,6 @@
 				colorDisplay.classList.remove("light-mode");
 			});
 		});
-	  </script>	  
+	  </script>
 </body>
 </html>
