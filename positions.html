@@ -13,99 +13,113 @@
 
 	<div class="position-container">
     <div class="sphere"></div>
+    <div class="square-1"></div>
+    <div class="square-2"></div>
+    <div class="door">
+      <div class="door-polygon"></div>
+      <div class="door-handle"></div>
+    </div>
   </div>
 
   <script>
     const sphere = document.querySelector('.sphere');
     const container = document.querySelector('.position-container');
-
+    const door = document.querySelector('.door');
+  
     let isDragging = false;
     let offsetX, offsetY, velocityX = 0, velocityY = 0;
     let friction = 0.95; // Friction for the "sliding" effect
-
+  
     // Function to start the drag
     sphere.addEventListener('mousedown', (e) => {
       isDragging = true;
-
+  
       // Calculate offsets relative to the sphere's position
       const sphereRect = sphere.getBoundingClientRect();
       offsetX = e.clientX - sphereRect.left;
       offsetY = e.clientY - sphereRect.top;
-
+  
       // Reset velocity when starting to drag
       velocityX = 0;
       velocityY = 0;
-
+  
       // Prevent text selection during drag
       e.preventDefault();
     });
-
+  
     // Function to move the sphere during mousemove
     document.addEventListener('mousemove', (e) => {
       if (isDragging) {
         // Calculate the new position of the sphere
         let posX = e.clientX - offsetX;
         let posY = e.clientY - offsetY;
-
+  
         // Prevent the sphere from going out of bounds of the container
         const containerRect = container.getBoundingClientRect();
         const sphereRect = sphere.getBoundingClientRect();
-
-        // Limit positions to ensure the sphere stays inside the container
+  
+        // Adjust the boundaries so that the ball can move through the door
         posX = Math.max(containerRect.left, Math.min(posX, containerRect.right - sphereRect.width));
         posY = Math.max(containerRect.top, Math.min(posY, containerRect.bottom - sphereRect.height));
-
+  
         // Apply the new position to the sphere
         sphere.style.left = `${posX - containerRect.left}px`;
         sphere.style.top = `${posY - containerRect.top}px`;
+  
+        // Check if the ball is within the door's bounds and should go through
+        const doorRect = door.getBoundingClientRect();
+        const sphereRect2 = sphere.getBoundingClientRect();
+  
+        if (
+          sphereRect2.left < doorRect.right &&
+          sphereRect2.right > doorRect.left &&
+          sphereRect2.top < doorRect.bottom &&
+          sphereRect2.bottom > doorRect.top
+        ) {
+          // Ball has entered the door; animate it going through
+          animateBallThroughDoor(sphere);
+        }
       }
     });
-
+  
     // When the drag ends
     document.addEventListener('mouseup', () => {
       isDragging = false;
     });
-
-    // Simulate physics (inertia and friction)
-    function animatePhysics() {
-      if (!isDragging) {
-        // Apply friction to simulate inertia
-        velocityX *= friction;
-        velocityY *= friction;
-
-        // Apply velocity to the sphere's movement
-        let currentX = sphere.offsetLeft;
-        let currentY = sphere.offsetTop;
-
-        // Prevent the sphere from going out of bounds of the container
-        const containerRect = container.getBoundingClientRect();
-        const sphereRect = sphere.getBoundingClientRect();
-
-        // Limit positions to keep the sphere inside the container
-        currentX = Math.max(containerRect.left, Math.min(currentX + velocityX, containerRect.right - sphereRect.width));
-        currentY = Math.max(containerRect.top, Math.min(currentY + velocityY, containerRect.bottom - sphereRect.height));
-
-        sphere.style.left = `${currentX - containerRect.left}px`;
-        sphere.style.top = `${currentY - containerRect.top}px`;
-
-        // Stop the animation if velocity is too small
-        if (Math.abs(velocityX) < 0.1 && Math.abs(velocityY) < 0.1) {
-          return;
+  
+    // Function to animate the ball going through the door
+    function animateBallThroughDoor(ball) {
+      let ballLeft = ball.offsetLeft;
+      let ballTop = ball.offsetTop;
+      let ballOpacity = 1;
+  
+      // Move ball through the door and fade it out
+      const moveInterval = setInterval(() => {
+        // Move ball to the right, out of the door, and decrease opacity
+        ballLeft += 5; // Move 5px every step to simulate going through
+        ballOpacity -= 0.04; // Fade out the ball
+  
+        // Apply new position and opacity to the ball
+        ball.style.left = `${ballLeft}px`;
+        ball.style.opacity = ballOpacity;
+  
+        // When the ball completely disappears (or reaches outside the door)
+        if (ballOpacity <= 0) {
+          clearInterval(moveInterval); // Stop the animation
+          ball.style.display = 'none'; // Hide the ball after it disappears
+  
+          // Reappear the ball after 3 seconds
+          setTimeout(() => {
+            // Reset ball position to the original starting point (or wherever you want it)
+            ball.style.top = '50%';
+            ball.style.left = '60%';
+            ball.style.transform = 'translate(-50%, -50%)';
+            ball.style.opacity = 1;    // Make it visible again
+            ball.style.display = 'block';  // Show the ball again
+          }, 2500); // Reappear after 3 seconds
         }
-      }
-
-      // Continue the animation in the next frame
-      requestAnimationFrame(animatePhysics);
+      }, 16); // 16ms for smooth animation (60fps)
     }
-
-    // Function to apply velocity to the sphere when moved
-    function applyVelocity(dx, dy) {
-      velocityX += dx;
-      velocityY += dy;
-    }
-
-    // Start the physics animation
-    animatePhysics();
   </script>
 </body>
 </html>

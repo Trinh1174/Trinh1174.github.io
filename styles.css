@@ -1338,13 +1338,6 @@ a {
     overflow: hidden;
 }
 
-/* For smaller screens (approximately 14" and below) */
-@media screen and (max-width: 1600px) {
-    .position-container {
-        height: 70vh;
-    }
-}
-
 .sphere {
     width: 100px;
     height: 100px;
@@ -1352,4 +1345,79 @@ a {
     position: absolute;
     cursor: pointer;
     border-radius: 100%;
+}
+
+.square-1, .square-2 {
+    width: 90px;
+    height: 90px;
+    background-color: #ff69b4;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.square-1 { 
+    left: 15%;
+    z-index: -1;
+}
+
+.square-2 { 
+    left: 35%;
+    z-index: 1000;
+}
+
+.door {
+    background-color: #fff;
+    border: solid 10px #ff69b4;
+    width: 120px;
+    height: 180px;
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.door-polygon {
+    width: 120px;
+    height: 180px;
+    clip-path: polygon(
+        0% 0%,
+        60% 20%,
+        60% 80%,
+        0% 100%
+    );
+    background-color: #ff69b4;
+}
+
+.door-handle {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    width: 20px;
+    height: 10px;
+    clip-path: polygon(
+        0% 0%,
+        100% 10%,
+        100% 90%,
+        0% 100%
+    );
+    background-color: #6495ed;
+}
+
+/* For smaller screens (approximately 14" and below) */
+@media screen and (max-width: 1600px) {
+    .position-container {
+        height: 70vh;
+    }
+
+    .door, .door-polygon {
+        width: 90px;
+        height: 150px;
+    }
+
+    .door-handle {
+        width: 15px;
+        height: 8px;
+    }
 }
