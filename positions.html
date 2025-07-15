@@ -12,6 +12,7 @@
 	</div>
 
 	<div class="position-container">
+	<div class="position-text"></div>
     <div class="sphere"></div>
     <div class="square-1"></div>
     <div class="square-2"></div>
@@ -25,51 +26,103 @@
     const sphere = document.querySelector('.sphere');
     const container = document.querySelector('.position-container');
     const door = document.querySelector('.door');
-  
+
     let isDragging = false;
     let offsetX, offsetY, velocityX = 0, velocityY = 0;
     let friction = 0.95; // Friction for the "sliding" effect
-  
+
     // Function to start the drag
     sphere.addEventListener('mousedown', (e) => {
       isDragging = true;
-  
+
       // Calculate offsets relative to the sphere's position
       const sphereRect = sphere.getBoundingClientRect();
       offsetX = e.clientX - sphereRect.left;
       offsetY = e.clientY - sphereRect.top;
-  
+
       // Reset velocity when starting to drag
       velocityX = 0;
       velocityY = 0;
-  
+
       // Prevent text selection during drag
       e.preventDefault();
     });
-  
+
+	// Define the target area in container‑coordinates:
+	const left_area = {
+		left:   0,
+		top:    150,
+		right: 100,
+		bottom: 250
+	};
+
+	const right_area = {
+		left:   500,
+		top:    150,
+		right: 600,
+		bottom: 250
+	};
+
+	const top_area_2 = {
+		left:   385,
+		top:    50,
+		right: 480,
+		bottom: 150
+	};
+
+	function inTarget(target, x, y) {
+	return x >= target.left &&
+			x <= target.right &&
+			y >= target.top &&
+			y <= target.bottom;
+	}
+
     // Function to move the sphere during mousemove
     document.addEventListener('mousemove', (e) => {
       if (isDragging) {
         // Calculate the new position of the sphere
         let posX = e.clientX - offsetX;
         let posY = e.clientY - offsetY;
-  
+
         // Prevent the sphere from going out of bounds of the container
         const containerRect = container.getBoundingClientRect();
         const sphereRect = sphere.getBoundingClientRect();
-  
+
         // Adjust the boundaries so that the ball can move through the door
         posX = Math.max(containerRect.left, Math.min(posX, containerRect.right - sphereRect.width));
         posY = Math.max(containerRect.top, Math.min(posY, containerRect.bottom - sphereRect.height));
-  
+
         // Apply the new position to the sphere
         sphere.style.left = `${posX - containerRect.left}px`;
         sphere.style.top = `${posY - containerRect.top}px`;
-  
+
+		// localX/Y are the offsets from the container’s origin:
+		const localX = sphereRect.left - containerRect.left;
+		const localY = sphereRect.top  - containerRect.top;
+
+		// 3) special log when in your rectangle
+		if (inTarget(left_area, localX, localY)) {
+			document.querySelector('.position-text').textContent = '🎉 Ball LEFT!';
+		} else if (inTarget(right_area, localX, localY)) {
+			document.querySelector('.position-text').textContent = '🎉 Ball RIGHT!';
+		} else if (inTarget(top_area, localX, localY)) {
+			document.querySelector('.position-text').textContent = '🎉 Ball TOP!';
+		// } else if (inTarget(bottom_area, localX, localY)) {
+		// 	document.querySelector('.position-text').textContent = '🎉 Ball BOTTOM!';
+		// } else if (inTarget(front_area, localX, localY)) {
+		// 	document.querySelector('.position-text').textContent = '🎉 Ball FRONT!';
+		// } else if (inTarget(behind_area, localX, localY)) {
+		// 	document.querySelector('.position-text').textContent = '🎉 Ball BEHIND!';
+		// } else if (inTarget(between_area, localX, localY)) {
+		// 	document.querySelector('.position-text').textContent = '🎉 Ball BETWEEN!';
+		} else {
+			document.querySelector('.position-text').textContent = '';
+		}
+
         // Check if the ball is within the door's bounds and should go through
         const doorRect = door.getBoundingClientRect();
         const sphereRect2 = sphere.getBoundingClientRect();
-  
+
         if (
           sphereRect2.left < doorRect.right &&
           sphereRect2.right > doorRect.left &&
@@ -81,46 +134,65 @@
         }
       }
     });
-  
+
     // When the drag ends
     document.addEventListener('mouseup', () => {
       isDragging = false;
     });
-  
+
     // Function to animate the ball going through the door
     function animateBallThroughDoor(ball) {
-      let ballLeft = ball.offsetLeft;
-      let ballTop = ball.offsetTop;
-      let ballOpacity = 1;
-  
-      // Move ball through the door and fade it out
-      const moveInterval = setInterval(() => {
-        // Move ball to the right, out of the door, and decrease opacity
-        ballLeft += 5; // Move 5px every step to simulate going through
-        ballOpacity -= 0.04; // Fade out the ball
-  
-        // Apply new position and opacity to the ball
-        ball.style.left = `${ballLeft}px`;
-        ball.style.opacity = ballOpacity;
-  
-        // When the ball completely disappears (or reaches outside the door)
-        if (ballOpacity <= 0) {
-          clearInterval(moveInterval); // Stop the animation
-          ball.style.display = 'none'; // Hide the ball after it disappears
-  
-          // Reappear the ball after 3 seconds
-          setTimeout(() => {
-            // Reset ball position to the original starting point (or wherever you want it)
-            ball.style.top = '50%';
-            ball.style.left = '60%';
-            ball.style.transform = 'translate(-50%, -50%)';
-            ball.style.opacity = 1;    // Make it visible again
-            ball.style.display = 'block';  // Show the ball again
-          }, 2500); // Reappear after 3 seconds
-        }
-      }, 16); // 16ms for smooth animation (60fps)
-    }
+		// 1) capture where it starts
+		const startLeft = ball.offsetLeft;
+		const startTop  = ball.offsetTop;
+
+		let ballLeft    = startLeft;
+		let ballOpacity = 1;
+
+		// ensure it's visible and in the right spot
+		ball.style.display = 'block';
+		ball.style.top     = `${startTop}px`;
+		ball.style.left    = `${startLeft}px`;
+		ball.style.opacity = 1;
+
+		// 2) move forward (to the right) while fading out
+		const forward = setInterval(() => {
+			ballLeft    += 5;
+			ballOpacity -= 0.04;
+
+			ball.style.left    = `${ballLeft}px`;
+			ball.style.opacity = ballOpacity;
+
+			if (ballOpacity <= 0) {
+			clearInterval(forward);
+			ball.style.display = 'none';
+
+			// 3) wait 2.5 s, then slide back
+			setTimeout(() => {
+				let backLeft    = ballLeft;
+				let backOpacity = 0;           // ← start from 0
+
+				ball.style.display = 'block';
+				ball.style.opacity = 0;        // make sure CSS agrees
+
+				const backward = setInterval(() => {
+				backLeft    -= 5;
+				backOpacity += 0.04;
+
+				ball.style.left    = `${backLeft}px`;
+				ball.style.opacity = Math.min(backOpacity, 1);
+											// clamp at 1 so you never overshoot
+
+				if (backLeft <= startLeft) {
+					clearInterval(backward);
+					ball.style.left    = `${startLeft - 10}px`;
+					ball.style.opacity = 1;
+				}
+				}, 16);
+			}, 2500);
+			}
+		}, 16);
+	}
   </script>
 </body>
 </html>
-

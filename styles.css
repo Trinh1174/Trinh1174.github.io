@@ -178,9 +178,9 @@ h2 {
 
 .log-entry {
     display: grid;
-    grid-template-columns: 
-      max-content   /* date’s auto width */ 
-      max-content   /* status tag’s auto width */ 
+    grid-template-columns:
+      max-content   /* date’s auto width */
+      max-content   /* status tag’s auto width */
       1fr;          /* take up the rest for your message */
     column-gap: 0.3rem;
     align-items: start;
@@ -818,7 +818,7 @@ a {
     .toggle-track:before {
         font-size: 0.7rem;
     }
-    
+
     .toggle-track {
         width: 6rem;      /* down from 9rem */
         height: 1.5rem;   /* down from 2rem */
@@ -838,7 +838,7 @@ a {
     .toggle-state-center .toggle-slider {
         left: 2.25rem;
     }
-    
+
     /* 2/3 of a 6rem track = 4rem; 0.25 + 4 = 4.25 */
     .toggle-state-right .toggle-slider {
         left: 4.25rem;
@@ -1356,12 +1356,12 @@ a {
     transform: translate(-50%, -50%);
 }
 
-.square-1 { 
+.square-1 {
     left: 15%;
     z-index: -1;
 }
 
-.square-2 { 
+.square-2 {
     left: 35%;
     z-index: 1000;
 }
@@ -1381,6 +1381,7 @@ a {
 .door-polygon {
     width: 120px;
     height: 180px;
+	margin-left: -1px;
     clip-path: polygon(
         0% 0%,
         60% 20%,
