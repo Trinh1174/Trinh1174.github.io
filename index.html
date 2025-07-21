@@ -11,6 +11,9 @@
 		<h1>Bienvenue sur Học tiếng Việt</h1>
 		<h2>Avec Thị Ngọc Trinh (Má)</h2>
 	</div>
+	<div class="article-container">
+		<div class="index-article" id="frontline">Loading...</div>
+	</div>
 
 	<div class="classes-wrapper">
 		<a href="clavier.html" class="button-link classes-button">⌨️ Clavier vietnamien</a>
@@ -26,5 +29,55 @@
 
 	<br/>
   	<a href="logs.html" class="button-link logs-button">📜 Logs</a>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', async () => {
+		  const proxy = url =>
+			`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+		
+		  try {
+			const html = await fetch(proxy('https://www.vietnamplus.vn/'))
+							   .then(r => { if (!r.ok) throw r; return r.text() });
+			const doc = new DOMParser().parseFromString(html, 'text/html');
+		
+			const headlineEl = doc.querySelector(
+			  '.abf-homepage .wrapper.two .story__heading a.cms-link'
+			);
+			const timeEl = doc.querySelector(
+			  '.abf-homepage .wrapper.two time.time'
+			);
+		
+			const title = headlineEl
+			  ? headlineEl.textContent.trim()
+			  : '— not found —';
+		
+			let formattedDate = '— no date —';
+			if (timeEl) {
+			  const raw = timeEl.getAttribute('datetime') || timeEl.textContent.trim();
+			  const dt  = new Date(raw);
+			  if (!isNaN(dt)) {
+				const two = n => n.toString().padStart(2, '0');
+				formattedDate = `${two(dt.getDate())}/${two(dt.getMonth()+1)}/${two(dt.getFullYear()%100)} ${two(dt.getHours())}:${two(dt.getMinutes())}`;
+			  }
+			}
+		
+			document.getElementById('frontline').innerHTML = `
+			  <h1>Article du jour</h1>
+			  <h2>${title}</h2>
+			  <p>🕒 ${formattedDate}</p>
+			`;
+		
+			// ← NEW: redirect to VietnamPlus homepage in a new tab
+			const container = document.querySelector('.article-container');
+			container.addEventListener('click', () => {
+			  window.open('https://www.vietnamplus.vn/', '_blank');
+			});
+		  }
+		  catch (err) {
+			document.getElementById('frontline').textContent =
+			  'Error loading frontline: ' + err.message;
+		  }
+		});
+	</script>
 </body>
 </html>
