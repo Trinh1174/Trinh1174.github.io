@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Học tiếng Việt</title>
+  <style>
+    .article-container { margin: 1em 0; }
+    #translation { margin-top: .5em; font-size: 1.2em; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="title-bar">
+    <h1>Học tiếng Việt</h1>
+    <a href="index.html" class="button-link home-button">🏠</a>
+  </div>
+
+  <div class="article-container">
+    <!-- 1) the input + button -->
+    <input id="term" type="text" placeholder="Tapez un mot en français" />
+    <button id="go">Go</button>
+
+    <!-- 2) where we’ll show the result -->
+    <div id="translation">Entrez un mot et cliquez Go</div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const proxy = url =>
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+    
+      const termInput = document.getElementById('term');
+      const goButton  = document.getElementById('go');
+      const out       = document.getElementById('translation');
+    
+      async function lookup() {
+        const term = termInput.value.trim();
+        if (!term) {
+            out.textContent = '⚠️ Merci de taper un mot…';
+            return;
+        }
+        out.textContent = '⏳ Recherche…';
+
+        const safeTerm = encodeURIComponent(term);
+        const url      = `https://fr.glosbe.com/fr/vi/${safeTerm}`;
+
+        try {
+            const html = await fetch(proxy(url))
+                                .then(r => { if (!r.ok) throw r; return r.text() });
+            const doc  = new DOMParser().parseFromString(html, 'text/html');
+
+            // Try the dictionary entry first, then the auto‑translate link
+            const node =
+            doc.querySelector('h3[id^="translation_"][lang="vi"]') ||
+            doc.querySelector('#glosbeTranslate_container a');
+
+            if (node && node.textContent.trim()) {
+            const vietnamese = node.textContent.trim();
+            out.innerHTML = `
+                <h1>Traduction</h1>
+                <p>${vietnamese}</p>
+            `;
+            console.log('→ traduction =', vietnamese);
+            } else {
+            console.warn('Aucune traduction pour', url);
+            out.textContent = '❌ Pas de traduction trouvée';
+            }
+
+        } catch (err) {
+            out.textContent = '❌ Erreur : ' + err.message;
+        }
+      }
+
+    
+      goButton.addEventListener('click', lookup);
+      termInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') lookup();
+      });
+    });
+    </script>
+    
+</body>
+</html>
